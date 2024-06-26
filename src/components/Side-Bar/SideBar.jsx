@@ -24,7 +24,7 @@ function Header() {
 
           <li class="list">
             <button className='bg-[#3887ee] text-center font-bold w-full p-2 rounded-full mt-2'>Post</button>
-          </li>
+          </li> 
 
 
 
