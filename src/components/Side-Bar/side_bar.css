@@ -1,0 +1,14 @@
+.list{
+    margin-top: 2px ;
+}
+.icon{
+    
+    border-radius: 0.75rem  ;
+    width: 2.5em;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem ;
+    font-size: 1.25rem /* 20px */;
+}
+/* 
+.icon:hover{
+    background-color: rgb(43, 39, 39) ;
+} */

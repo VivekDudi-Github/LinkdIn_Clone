@@ -9,7 +9,7 @@ function Centeral_Bar() {
          <div className='mx-auto'>
               <input 
                 type="text" 
-                className='rounded-xl bg-gray-800 px-2 text-white'
+                className='rounded-xl bg-gray-800 px-2 text-white w-[90%]'
                 placeholder='Add Your Post' />
          </div>
     </div>
