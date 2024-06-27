@@ -3,7 +3,11 @@ import React from 'react'
 function Centeral_Bar() {
   return (
     <>
-    <div className='w-[30%] flex flex-col border-x  p-4 '>
+
+    <i class="fa-solid fa-arrow-left text-white"></i>
+
+    <div className='w-[30%] flex flex-col p-4 '>
+ 
          <div className='text-white  rounded-xl'>Centeral_Bar</div>
          
          <div className='mx-auto'>

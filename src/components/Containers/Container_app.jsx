@@ -5,10 +5,10 @@ function Container_app({children}) {
 
   return (
     <>
-    <div className='flex justify-center'>
+    <div className='flex justify-center ml-[10vw]'>
     {children}
     </div>
-  
+
   </>
   )
 

@@ -10,8 +10,9 @@ function App() {
   return (
     <>
     <div className='bg-black h-[100vh]'>
+    <SideBar/>
     <Container_app>
-          <SideBar/>
+         
           <Centeral_Bar/>
           <Right_bar/>
     </Container_app>
