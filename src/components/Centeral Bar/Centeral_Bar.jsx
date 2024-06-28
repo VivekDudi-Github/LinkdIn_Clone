@@ -3,20 +3,31 @@ import React from 'react'
 function Centeral_Bar() {
   return (
     <>
+      <div className='w-[70%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
 
-    <i class="fa-solid fa-arrow-left text-white"></i>
+          <div className='text-white flex  content-center mt-1 ml-2 '>
+              <span class=" w-10 text-white ">
+                <i className='fa-solid fa-arrow-left hover:bg-gray-900 duration-200 p-2 rounded-full ' ></i>
+              </span>
+              <span className=' ml-8 flex flex-col'>
+                  <span className=' font-bold text-lg'>ABC Xyz</span> 
+                  <span className=' text-[0.7em] text-gray-500 font-normal'>1,248 posts</span>
+              </span>
+          </div>
 
-    <div className='w-[30%] flex flex-col p-4 '>
- 
-         <div className='text-white  rounded-xl'>Centeral_Bar</div>
-         
-         <div className='mx-auto'>
-              <input 
-                type="text" 
-                className='rounded-xl bg-gray-800 px-2 text-white w-[90%]'
-                placeholder='Add Your Post' />
-         </div>
-    </div>
+          <div className='relative'><img className='h-56 w-full border'></img>
+            <img className='h-32 w-32 absolute inset-x-5 inset-y-36 rounded-full bg-gray-900 '></img>
+          </div>
+
+          <div className='text-white  rounded-xl'>Centeral_Bar</div>
+    
+          <div className='mx-auto'>
+                    <input 
+                      type="text" 
+                      className='rounded-xl bg-gray-800 px-2 text-white w-[90%]'
+                      placeholder='Add Your Post' />
+          </div>
+        </div>
     </>
   )
 }
