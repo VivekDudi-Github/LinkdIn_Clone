@@ -1,0 +1,11 @@
+.post_box_icons{
+    margin: 0;
+    padding: 4px ;
+    border-radius: 50%;
+    transition-duration: 200ms;
+    width: 30px;
+    height: 30px;
+}
+.post_box_icons:hover{
+    background-color: rgb(59, 57, 57);
+}

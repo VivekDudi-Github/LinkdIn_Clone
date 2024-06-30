@@ -1,9 +1,10 @@
 import React from 'react'
+import Bio_bar from './Bio_bar'
 
 function Centeral_Bar() {
   return (
     <>
-      <div className='w-[70%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
+      <div className='w-[53%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">
@@ -15,12 +16,17 @@ function Centeral_Bar() {
               </span>
           </div>
 
-          <div className='relative'><img className='h-56 w-full border'></img>
+          <div className='relative'><img className='h-56 w-full border '></img>
             <img className='h-32 w-32 absolute inset-x-5 inset-y-36 rounded-full bg-gray-900 '></img>
           </div>
+          
+          <div className='h-16 text-white text-right p-4'>
+              <button className='border-gray-700 border-[1px] rounded-full p-2 px-4 hover:bg-gray-900 duration-200 font-bold'
+              >Edit profile</button>
+          </div>
 
-          <div className='text-white  rounded-xl'>Centeral_Bar</div>
-    
+            <Bio_bar/>
+
           <div className='mx-auto'>
                     <input 
                       type="text" 

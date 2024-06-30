@@ -5,7 +5,7 @@ function Container_app({children}) {
 
   return (
     <>
-    <div className='flex justify-start ml-[30vw]'>
+    <div className='flex justify-start ml-[27vw]'>
     {children}
     </div>
 
