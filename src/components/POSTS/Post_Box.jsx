@@ -4,7 +4,7 @@ import "./Post_Box.css"
 function Post_Box() {
   return (
     <>
-      <div className= ' w-[50%] border-[1px] border-gray-600 flex text-white  '>
+      <div className= ' w-full border-[1px] border-gray-600 flex text-white  '>
           <div className=' w-14 p-2 pt-1 pb-3  '>
               <img className='border rounded-full w-[40px] h-[40px] '></img>
           </div>

@@ -4,7 +4,7 @@ import Bio_bar from './Bio_bar'
 function Centeral_Bar() {
   return (
     <>
-      <div className='w-[53%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
+      <div className='w-[50%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">

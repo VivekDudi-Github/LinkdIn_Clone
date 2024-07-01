@@ -1,8 +1,12 @@
 import React from 'react'
 
-function Post_Container() {
+function Post_Container({children}) {
   return (
-    <div>Post_Container</div>
+    <>
+    <div className='w-[50%] '>
+    {children}
+    </div>
+    </>
   )
 }
 
