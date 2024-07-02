@@ -1,13 +1,24 @@
-import React from 'react'
+import React , {useEffect , useState} from 'react'
 
-function Login_page() {
+function Login_page(props) {
+    let [open_close , setOpen_close] = useState(false)
+    
+    useEffect(()=> {
+        if(props.isLogin_Page)
+            setOpen_close(true);
+    } , [props.isLogin_Page])
+
   return (
     <>
-        <div className=' w-full fixed top-0 h-[100vh] bg-[#1f177443] flex justify-center items-center py-10 '
+        <div className={` w-full fixed top-0 h-[100vh] bg-[#1f177443] justify-center items-center py-10 ${ open_close ? "flex" : "hidden"} `}
         > 
             <div className='bg-black rounded-2xl w-[37rem] h-[99%] flex flex-col items-center text-center py-2 pt-6 relative '>
-            <button className="absolute top-2 left-2 p-3 py-1 text-lg rounded-full hover:bg-gray-600 duration-200 du"><i className='fa-solid fa-xmark text-white '></i></button>
+            <button className="absolute top-2 left-2 p-3 py-1 text-lg rounded-full hover:bg-gray-600 duration-200 du"
+                    onClick={()=> setOpen_close(false)}
+            ><i className='fa-solid fa-xmark text-white '></i></button>
+                
                 <div><i className='fa-brands fa-x-twitter text-4xl mb-8'></i></div>
+
                 <div className='w-[55%] pl-6'>
                     <div className='text-4xl text-left font-bold mb-8'>Sign in to X</div>
                 </div>
