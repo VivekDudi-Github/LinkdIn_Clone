@@ -9,7 +9,7 @@ import Post_Box from './components/POSTS/Post_Box'
 import Create_Post from './components/POSTS/Create_Post'
 import Post_Container from './components/POSTS/Post_Container'
 
-import Login_page from './components/Login_Logout/Login_page'
+import Login_home from './components/Login_Logout/Login_home'
 
 
 
@@ -18,19 +18,20 @@ function App() {
   return (
     <>
     <div className='bg-black h-[100vh]'>
-    {/* <SideBar/>
-    <Container_app>
-          <Post_Container>
+     {/* <SideBar/>
+    <Container_app> */}
+    {/*      <Post_Container>
           <Create_Post/>
           <Post_Box/>  
           </Post_Container>
        
            */}
           
-          {/* <Centeral_Bar/> */}
-          {/* <Right_bar/>
+          {/* <Centeral_Bar/>
+          <Right_bar/>
     </Container_app> */}
-    <Login_page/>
+    
+    <Login_home/>
 
 
     </div>

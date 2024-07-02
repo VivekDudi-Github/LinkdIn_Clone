@@ -4,8 +4,8 @@ function Bio_bar() {
   return (
     <>
     <div className='text-white pl-4'>
-      <p className='font-bold text-xl'>Vivek Dudi</p>
-      <p className='text-base text-gray-500 font-sans'>@VivekxDudi</p>
+      <p className='font-bold text-xl'>Abc Dev</p>
+      <p className='text-base text-gray-500 font-sans'>@Learning_</p>
       <p className='text-base py-2'>Tech Enthusiast <br/> A student <br/><br/>Learning along with You Friends  </p>
     </div>
 
