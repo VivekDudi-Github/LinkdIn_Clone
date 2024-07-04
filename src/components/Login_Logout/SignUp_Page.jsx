@@ -1,4 +1,6 @@
 import React , {useEffect , useState} from 'react'
+import {auth} from "../../firebase_SDK"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp_Page(props) {
 
@@ -10,6 +12,17 @@ export default function SignUp_Page(props) {
     const [IsPassMatch , setPassMatch] = useState("hg")
     const [open_close , setOpen_close] = useState(false) ;
     const [open_close_password  , setOpen_close_password] = useState(false)
+
+
+//authentication
+    const sign_Up = async () => {
+        try {
+            await createUserWithEmailAndPassword(auth , email , Password1)
+            .then((response)=> {console.log(response);})
+        } catch (error) {
+            console.log("error =" , error );
+        }
+    }   
 
     const passMatch = () => {
         setPassMatch(Password1 === Password2)
@@ -27,6 +40,7 @@ export default function SignUp_Page(props) {
     
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const allDays = Array(30).fill(0).map((_, i) => i + 1);
+
 
     return (
     <>
@@ -117,7 +131,8 @@ export default function SignUp_Page(props) {
                             <button className={` bg-white rounded-full text-black font-sans font-bold p-4 my-2 w-[400px] hover:bg-gray-300 duration-200 `}
                                     type='submit'
                                     onClick={()=> {passMatch() ;
-                                                console.log("clicked");}}
+                                                if(IsPassMatch) 
+                                                    sign_Up()}}
                             >Sign Up</button>
                         </div>
                 </form>

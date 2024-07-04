@@ -11,27 +11,27 @@ import Post_Container from './components/POSTS/Post_Container'
 
 import Login_home from './components/Login_Logout/Login_home'
 
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements , BrowserRouter } from 'react-router-dom'
 
 
 function App() {
 
   return (
     <>
-    <div className='bg-black h-[100vh]'>
-     {/* <SideBar/>
-    <Container_app> */}
-    {/*      <Post_Container>
+    <div className='bg-black min-h-[100vh]'>
+     <Container_app>
+          <SideBar/> 
+          <Post_Container>
           <Create_Post/>
           <Post_Box/>  
           </Post_Container>
-       
-           */}
+          
           
           {/* <Centeral_Bar/>
-          <Right_bar/>
-    </Container_app> */}
+          <Right_bar/> */}
+    </Container_app> 
     
-    <Login_home/>
+    {/* <Login_home/> */}
 
 
     </div>
