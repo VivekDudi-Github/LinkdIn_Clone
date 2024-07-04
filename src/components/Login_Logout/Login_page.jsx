@@ -4,8 +4,6 @@ import {NavLink} from "react-router-dom"
 function Login_page(props) {
     const [email , setEmail] = useState("");
 
-    
-
     let [open_close , setOpen_close] = useState(false)
     
     useEffect(()=> {
