@@ -7,7 +7,7 @@ function Login_home() {
     const [isLogin_Page , setLogin_Page] = useState(false)
     
     const changeTheProp1 = ()=> {
-        setCreateAcc(!isCreateAcc) 
+        setCreateAcc(!isCreateAcc) ;
     }
     const changeTheProp2 = ()=> {
         setLogin_Page(!isLogin_Page) 
@@ -25,7 +25,7 @@ function Login_home() {
 
             <div className=' text-left'>
                 <div><button className=' bg-white hover:bg-gray-200 rounded-full text-black font-sans font-bold p-2 my-2 w-72'><i className='fa-brands fa-google text-base m-2 '></i>Signup With Google</button></div>
-                <div><button className=' bg-white hover:bg-gray-200 rounded-full text-black font-sans font-bold p-2 my-2 w-72'><i className='fa-brands fa-apple text-lg m-2'></i>Signup WIth Apple</button></div>
+                <div><button className=' bg-white hover:bg-gray-200 rounded-full text-black font-sans font-bold p-2 my-2 w-72'><i className='fa-brands fa-apple text-lg m-2'></i>Signup With Apple</button></div>
 
                 <div className='flex items-center '>
                     <div className=' h-[1px] w-[134px] bg-gray-500'></div><div className='relative bottom-0.5'>or</div>

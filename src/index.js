@@ -8,7 +8,6 @@ import Create_Post from "./components/POSTS/Create_Post";
 import Post_Box from "./components/POSTS/Post_Box";
 
 
-
 export {
         SideBar , 
         Centeral_Bar ,
@@ -18,5 +17,6 @@ export {
         Post_Container ,
         Post_Box , 
         Create_Post ,
+
 
 }

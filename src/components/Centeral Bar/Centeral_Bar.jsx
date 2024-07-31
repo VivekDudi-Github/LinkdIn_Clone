@@ -12,7 +12,7 @@ function Centeral_Bar() {
               </span>
               <span className=' ml-8 flex flex-col'>
                   <span className=' font-bold text-lg'>ABC Xyz</span> 
-                  <span className=' text-[0.7em] text-gray-500 font-normal'>1,248 posts</span>
+                  <span className=' text-[0.7em] text-gray-500 font-normal'>0 posts</span>
               </span>
           </div>
 

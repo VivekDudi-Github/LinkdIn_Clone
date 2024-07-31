@@ -4,8 +4,8 @@ function Bio_bar() {
   return (
     <>
     <div className='text-white pl-4'>
-      <p className='font-bold text-xl'>Abc Dev</p>
-      <p className='text-base text-gray-500 font-sans'>@Learning_</p>
+      <p className='font-bold text-xl'>ABC Xyz</p>
+      <p className='text-base text-gray-500 font-sans'>@NPM_run_Dev</p>
       <p className='text-base py-2'>Tech Enthusiast <br/> A student <br/><br/>Learning along with You Friends  </p>
     </div>
 
@@ -16,8 +16,8 @@ function Bio_bar() {
       <div className='mr-2'><i className='fa-solid fa-check-to-slot mx-2'   /><span >Verified Phone Number</span></div>
     </div>
     <div className='my-2 text-white  '>
-      <span className='pl-4'><b>825</b><span className=' text-gray-500'> Following </span></span>
-      <span className='pl-4'><b>927</b><span className=' text-gray-500'> Followers </span></span>
+      <span className='pl-4'><b>0</b><span className=' text-gray-500'> Following </span></span>
+      <span className='pl-4'><b>0</b><span className=' text-gray-500'> Followers </span></span>
     </div>
     </>
   )
