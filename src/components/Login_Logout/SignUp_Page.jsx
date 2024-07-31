@@ -1,23 +1,38 @@
 import React , {useEffect , useState} from 'react'
-import {auth , db} from "../../firebase_SDK"
+import {Auth , DB} from "../../firebase_SDK"
+import { useNavigate } from 'react-router';
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection } from "firebase/firestore"; 
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection  , Timestamp } from "firebase/firestore"; 
 
+import {newTime} from "../../index_func"
 
 
 export default function SignUp_Page(props) {
+    const navigate = useNavigate() ;
 
     const [email , setEmail] = useState("")
     const [name  ,setName] = useState("")
+    
+    const [DoB , setDoB] = useState({
+        Year : 2000 , 
+        Day : "" , 
+        Month : "" , 
+    }) 
+
+
     const [Password1 ,setPassword1] = useState("")
     const [Password2 , setPassword2] = useState("")
 
     const [IsPassMatch , setPassMatch] = useState("hg")
     const [open_close , setOpen_close] = useState(false) ;
     const [open_close_password  , setOpen_close_password] = useState(false)
+
     
+
     const [showPass , setShowPass] = useState(false)
+
+
 
 //password hide-show
 const handleShowPass = () => {
@@ -27,34 +42,73 @@ const handleHidePass = () => {
     setShowPass(false)
 }
 
-//signup
+//signup & //Login 
     const sign_Up = async () => {
         try {
-            await createUserWithEmailAndPassword(auth , email , Password1)
-            .then((response)=> {console.log(response);})
+            const response =  await createUserWithEmailAndPassword(Auth , email , Password1)
+                alert("Signed Up successfully")
+                console.log(response); 
+                if(response){
+                    const user = {
+                        name : name , 
+                        email : response.user.email , 
+                        userId : response.user.uid , 
+                        date : newTime(Timestamp) , 
+                        DOB : DoB ,
+                    }
+                    const CollectionRef = collection(DB , "user")
+                    try {
+                        await addDoc(CollectionRef , user)
+                        alert("Logging IN")
+                        await signInWithEmailAndPassword(Auth , response.user.email , Password1 )
+                        alert("LoggedIn successfully")
+                        navigate("/home")
+                        
+                    } catch (error) {
+                       alert("error while adding the userCredentials") 
+                    }
+                }
+        
         } catch (error) {
+            alert("Something went wrong , Please your credentials and try again")
             console.log("error =" , error );
         }
     }   
 
 
-    const passMatch = () => {
-        setPassMatch(Password1 === Password2)
-    }
+const passMatch = () => {
+    setPassMatch(Password1 === Password2)
+}
+
+useEffect(()=> {
+    if(props.isCreateAcc)
+        setOpen_close(true);
+} , [props.isCreateAcc])
+
+const openPassPage = (e)=> {
+    e.preventDefault() ;
+    setOpen_close_password(true)
+}
+
+//Functionality for DoB Feild
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    const monthsWith31Days = ["January", "March", "May", "July", "August", "October", "December"];
+    const monthsWith30Days = ["April", "June", "September", "November"];
+
+    let [allDays , setAllDays] = useState([]) ;
 
     useEffect(()=> {
-        if(props.isCreateAcc)
-            setOpen_close(true);
-    } , [props.isCreateAcc])
-
-    const openPassPage = (e)=> {
-        e.preventDefault() ;
-        setOpen_close_password(true)
+        if(monthsWith31Days.includes(DoB.Month)){
+            setAllDays(Array(31).fill(0).map((_, i) => i + 1));
+    }else if (monthsWith30Days.includes(DoB.Month)){
+        setAllDays(Array(30).fill(0).map((_, i) => i + 1) )
+    }else if(DoB.Month === "February" && DoB.Year % 4 == 0 ) {
+        setAllDays(Array(29).fill(0).map((_, i) => i + 1)) 
+    }else if (DoB.Month === "February" && DoB.Year % 4 != 0  ){
+        setAllDays(Array(28).fill(0).map((_, i) => i + 1)) 
     }
-
-
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const allDays = Array(30).fill(0).map((_, i) => i + 1);
+    } , [DoB.Month , DoB.Year])
 
 
     return (
@@ -71,7 +125,6 @@ const handleHidePass = () => {
 
           <div><i className='fa-brands fa-x-twitter text-4xl mb-8'></i></div>
 
-        
             <div className='w-[60%] pl-6'>
                 <div className='text-3xl text-left font-bold mb-8 '>Create You Account</div>
             </div>
@@ -88,6 +141,7 @@ const handleHidePass = () => {
                                 onChange={(e) => setName(e.target.value) }
                                 placeholder='Name'
                                 type='text'
+                                required
                                 />
                     </div>
 
@@ -98,6 +152,7 @@ const handleHidePass = () => {
                                 onChange={(e)=> setEmail(e.target.value)}
                                 placeholder='Email'
                                 type='email'
+                                required
                                 />
                     </div>
 
@@ -111,7 +166,10 @@ const handleHidePass = () => {
                      
                     {/* month */}
                         <div className='m-1 border-[1px] border-gray-600 text-xl '>
-                            <select className=' p-2 bg-black focus:outline-blue-500 scroll-none' placeholder="Month" >
+                            <select className=' p-2 bg-black focus:outline-blue-500 scroll-none' placeholder="Month" 
+                                onChange={(e) => {
+                                    setDoB({ ...DoB , Month : e.target.value})
+                                }} required>
                                 { months.map((month) => 
                                     <option key={month} className='text-base'>{month}</option>)}
                             </select>
@@ -119,16 +177,26 @@ const handleHidePass = () => {
                     
                     {/* Days */}
                         <div className='m-1 border-[1px] border-gray-600 text-xl'>
-                            <select className=' p-2 bg-black focus:outline-blue-500 outline-1' placeholder="Month" >
-                                { allDays.map((day) => 
-                                    <option key={day} className='text-sm'>{day}</option>)}
+                            <select className=' p-2 bg-black focus:outline-blue-500 outline-1' placeholder="Month" 
+                                onChange={(e) => {
+                                    setDoB({...DoB , Day : e.target.value})
+                                }} required>
+
+                                {allDays.map((day) => 
+                                    <option key={day} className='text-sm'>{day}</option>)} 
+
                             </select>
                         </div>
                     
                     {/* Year */}
                         <div className='  m-1 border-[1px] border-gray-600 text-xl '>
                             <input className='bg-black focus:outline-blue-500 w-24 p-2' placeholder='Year'
+                                defaultValue={'2000'}
+                                min={'1950'}
+                                max={new Date().getFullYear()}
                                 type='number' maxLength={4} 
+                                onChange={(e) => setDoB({...DoB , Year : e.target.value})}
+                                required
                             />  
                         </div>
                     </div>
@@ -152,7 +220,7 @@ const handleHidePass = () => {
                                     <span className='hover:cursor-pointer'
                                         onMouseDown={handleShowPass}
                                         onMouseUp={handleHidePass}>
-                                    <i className={` ${showPass ? "fa-eye-slash" : "fa-eye"} fa-regular  absolute text-xl right-4 top-1/3`}></i>
+                                    <i className={` ${showPass ? "fa-eye-slash" : "fa-eye"} fa-regular  absolute text-xl right-4 top-1/3 `}></i>
                                     </span>
                                 <input 
                                     className=' w-96 bg-black focus:outline-none'
@@ -167,12 +235,7 @@ const handleHidePass = () => {
                     {/* Passwords2 */}
 
                         <div className='border-[1px] border-gray-600 p-2 py-4 mb-1 relative'>
-                                    
-                                    <span className='hover:cursor-pointer'
-                                        onMouseDown={handleShowPass}
-                                        onMouseUp={handleHidePass}>
-                                    <i className={` ${showPass ? "fa-eye-slash" : "fa-eye"} fa-regular  absolute text-xl right-4 top-1/3`}></i>
-                                    </span>
+                                  
                                 <input 
                                     className=' w-96 bg-black focus:outline-none'
                                     onChange={(e) => {setPassword2(e.target.value) ;}}
@@ -183,13 +246,13 @@ const handleHidePass = () => {
                         <p className='w-96 text-xs text-left text-gray-600 mb-4'>Confirm Your Password.</p>
                    
                     {/* Submit */}
-                    
+
                         <div>
                             <button className={` bg-white rounded-full text-black font-sans font-bold p-4 my-2 w-[400px] hover:bg-gray-300 duration-200 `}
                                     type='submit'
                                     onClick={()=> {passMatch() ;
-                                                if(IsPassMatch) 
-                                                    sign_Up()}}
+                                                if( Password1 === Password2){ 
+                                                    sign_Up()}}}
                             >Sign Up</button>
                         </div>
                 </form>
