@@ -1,5 +1,6 @@
 import React from 'react'
-import Bio_bar from './Bio_bar'
+import Bio_bar from './Bio_bar' 
+import { NavLink } from 'react-router-dom'
 
 function Centeral_Bar() {
   return (
@@ -8,7 +9,9 @@ function Centeral_Bar() {
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">
+               <NavLink to={'/home'}>
                 <i className='fa-solid fa-arrow-left hover:bg-gray-900 duration-200 p-2 rounded-full ' ></i>
+               </NavLink>
               </span>
               <span className=' ml-8 flex flex-col'>
                   <span className=' font-bold text-lg'>ABC Xyz</span> 

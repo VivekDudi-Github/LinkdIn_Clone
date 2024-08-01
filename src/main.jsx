@@ -10,7 +10,7 @@ import { Signup_home , Home , Profile , Not_found} from "./Index_pages.js"
 const rooter = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
-      {/* <Route path='/*' element={<Not_found/>} /> */}
+      <Route path='/*' element={<Not_found/>} />
       <Route path='' element={<Signup_home/>} />
       <Route path='/home' element={<Home/>} />
       <Route path='/profile' element={<Profile/>}/>

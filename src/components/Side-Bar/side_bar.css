@@ -1,7 +1,8 @@
 .list{
-    margin-top: 1px ;
     font-size: 1.25rem /* 20px */;
     font-weight: 400;
+    /* margin: 7px 0px ; */
+    /* padding: 0.5rem 1.5rem 0.75rem 0.5rem; */
 }
 .icon{
     margin-right: 5px;
@@ -12,6 +13,17 @@
     font-size: 1.4rem ;
     
     
+}
+.sideBar_icon:hover{
+    background-color: #181717;
+    
+}
+
+.sideBar_icon{
+    cursor: pointer;
+    border-radius: 9999px; 
+    padding: 0.5rem 1.5rem 0.75rem 0.5rem;
+    transition-duration: 200ms;
 }
 /* 
 .icon:hover{

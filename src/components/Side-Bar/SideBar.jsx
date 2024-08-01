@@ -1,28 +1,77 @@
 import React from 'react'
 import "./side_bar.css"
+import { NavLink } from 'react-router-dom';
+
+
+const listItems = [
+  {
+    icon: 'fa-solid fa-house',
+    text: 'Home'
+  },
+  {
+    icon: 'fa-solid fa-magnifying-glass',
+    text: 'Explore'
+  },
+  {
+    icon: 'fa-regular fa-bell',
+    text: 'Notifications'
+  },
+  {
+    icon: 'fa-regular fa-envelope',
+    text: 'Messages'
+  },
+  {
+    icon: 'fa-solid fa-cloud',
+    text: 'Grok'
+  },
+  {
+    icon: 'fa-solid fa-user-group',
+    text: 'Communities'
+  },
+  {
+    icon: 'fa-brands fa-x-twitter',
+    text: 'Premium'
+  },
+  {
+    icon: 'fa-solid fa-user',
+    text: 'Profile'
+  }
+];
 
 function Header() {
+
+
+
   return (
     <>
     <span className=' fixed text-white w-[20%] h-full  p-3 left-[8svw]  flex flex-col justify-between '>
+      
       <div>
-          <ul className='flex-col flex'>
-            {/* icons */}
-              <li class='list'> <i className='fa-brands fa-x-twitter text-3xl hover:bg-gray-700 rounded-xl py-1 px-2 mb-1 ml-1'></i></li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-solid fa-house icon '                  />Home         </span>  </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-solid fa-magnifying-glass icon'        />Explore      </span>  </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-regular fa-bell icon '                 />Notifications </span> </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-regular fa-envelope  icon'             />Messages      </span> </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-solid fa-cloud icon'                   />Grok         </span>  </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-solid fa-user-group icon'              />Communities  </span>  </li>
-              <li class='list'> <span  className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-brands fa-x-twitter icon'              />Premium      </span>  </li>
-              <li class='list'> <span className ='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><i className='fa-solid fa-user icon '                   />Profile       </span> </li>
-              
-              <li class='list mt-[10px]'> <span className='hover:bg-[#181717] rounded-full py-2 pl-2 pb-3  pr-6 duration-200'><span className=' '> 
-                  <i className='fa-solid fa-ellipsis text-xs hover:bg-gray-700 rounded-full m-1 mr-4 py-[1.5px] px-[4px]  border-[3px]  '/></span> More </span></li>
+        {/* side icons */}
+          <ul className='flex-col flex '>
+              <li className='list'> <i className='fa-brands fa-x-twitter text-3xl hover:bg-gray-700 rounded-xl py-1 px-2 mb-1 ml-1'></i>
+              </li>
+
+                    { listItems.map((item , index) => (
+              <li className='list' key={index}>
+                  <NavLink to={`/${item.text.toLowerCase()}`}>
+                    <span  className='sideBar_icon'><i className={`${item.icon} icon`}
+                      />{item.text}
+                    </span>
+                  </NavLink>    
+              </li>
+                     ))}
+
+              <li className='list mt-[10px]'>
+                <span className='sideBar_icon '>
+                  <span><i className='fa-solid fa-ellipsis text-xs hover:bg-gray-700 rounded-full m-1 mr-4 py-[1.5px] px-[4px]  border-[3px]  '/></span> 
+                    More
+                </span>
+              </li>
 
               {/* button */}
-              <li class="list"><button className='bg-[#3887ee] text-center font-bold w-[80%] p-2 rounded-full mt-4'>Post</button></li>   
+              <li className="list"><button className='bg-[#3887ee] text-center font-bold w-[80%] p-2 rounded-full mt-4'>Post</button>
+              </li>   
           </ul>
       </div>    
 
