@@ -1,16 +1,23 @@
 import React from 'react'
-import {SideBar , Post_Container , Create_Post , Right_bar, Container_app, Post_Box } from "../../index"
+import { Post_Container , Create_Post , Right_bar, App_layout, Post_Box } from "../../index"
 
 function Home() {
   return (
     <>
-        <Container_app>
-            <SideBar/>
+        <App_layout>
                 <Post_Container>
                     <Create_Post/>
                     <Post_Box/>
+                    {/* <Post_Box/>
+                    <Post_Box/>
+                    <Post_Box/>
+                    <Post_Box/>
+                    <Post_Box/>
+                    <Post_Box/>
+                    <Post_Box/> */}
                 </Post_Container>
-        </Container_app>
+              {/* <Right_bar/> */}
+        </App_layout>
     </>
   )
 }

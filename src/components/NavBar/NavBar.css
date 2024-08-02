@@ -27,7 +27,17 @@
     padding: 0.5rem 1.5rem 0.75rem 0.5rem;
     transition-duration: 200ms;
 }
-/* 
-.icon:hover{
-    background-color: rgb(43, 39, 39) ;
-} */
+
+@media(max-width :640px){
+    .side_navbar{
+        display: flex;
+        background-color: black;
+        transform: translateX(-235px);
+    }
+    .animated{
+        transform: translateX(0px);
+    }
+    .nav_text{
+        display: inline ;
+    }
+}

@@ -1,14 +1,14 @@
 import React from 'react'
-import {Container_app , SideBar , Centeral_Bar , Right_bar} from "../../index"
+import {App_layout , NavBar , Centeral_Bar , Right_bar} from "../../index"
 
 function Profile() {
   return (
     <>
-        <Container_app>
-            <SideBar/>
+        <App_layout>
+            <NavBar/>
             <Centeral_Bar/>
             <Right_bar/>
-        </Container_app>
+        </App_layout>
     </>
   )
 }

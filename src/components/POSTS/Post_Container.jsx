@@ -3,7 +3,7 @@ import React from 'react'
 function Post_Container({children}) {
   return (
     <>
-    <div className='w-[50%] '>
+    <div className='w-full '>
     {children}
     </div>
     </>
