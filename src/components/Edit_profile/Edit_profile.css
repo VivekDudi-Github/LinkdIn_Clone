@@ -1,0 +1,12 @@
+@media(max-height: 640px ) {
+    .edit_profile_container{
+        height: 100vh;
+        border-radius: 0%;
+    }
+}
+div{
+    box-sizing: border-box;
+}
+.form_header{
+    backdrop-filter: blur(2px);
+}
