@@ -5,7 +5,8 @@ import './index.css'
 
 import {Route , RouterProvider , createBrowserRouter , createRoutesFromElements} from "react-router-dom"
 import { Signup_home , Home , Profile , Not_found} from "./Index_pages.js"
-
+import store from "./Redux/store.js"
+import { Provider } from 'react-redux'
 
 const rooter = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,8 @@ const rooter = createBrowserRouter(
       <Route path='' element={<Signup_home/>} />
       <Route path='/home' element={<Home/>} />
       <Route path='/profile' element={<Profile/>}/>
+      {/* <Route path='/edit_profile' element={<Edit_Profile/>}/> */}
+    
     </Route>
   )
 ) 
@@ -21,6 +24,8 @@ const rooter = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={rooter} />
+    <Provider store={store}>
+      <RouterProvider router={rooter} />
+    </Provider>
   </React.StrictMode>,
 )

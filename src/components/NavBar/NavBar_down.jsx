@@ -12,7 +12,7 @@ const iconList = [
   
 function NavBar_down() {
   return (
-    <nav className='text-white fixed bottom-0 sm:hidden block border-gray-600  border-t-2 w-full h-14'>
+    <nav className='text-white fixed bottom-0 sm:hidden block border-gray-600  border-t-2 w-full h-14 bg-[#000000ce]'>
         
         <span>
             <button className='bg-blue-600 absolute w-[60px] h-[60px] -top-[5rem] right-7 rounded-full '>
@@ -21,8 +21,8 @@ function NavBar_down() {
         </span>
         
         <ul className=' w-full flex justify-around my-1 text-xl'>
-            {iconList.map((item) => (
-                <li>
+            {iconList.map((item , index) => (
+                <li key={index}>
                     <NavLink to={item.nav}>
                         <span className='hover:bg-gray-900 rounded-full flex justify-center items-center w-12 h-12 '>
                             <i className={`${item.icon}`} ></i>

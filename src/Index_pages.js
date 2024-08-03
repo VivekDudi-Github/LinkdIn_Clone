@@ -3,9 +3,11 @@ import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Not_found from "./pages/not found/Not_found";
 
+
 export {
     Signup_home ,
     Home , 
     Profile ,
+    
     Not_found ,
 }

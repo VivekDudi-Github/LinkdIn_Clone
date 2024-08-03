@@ -35,7 +35,11 @@ const listItems = [
   {
     icon: 'fa-solid fa-user',
     text: 'Profile'
-  }
+  },
+  {
+    icon: 'fa-solid fa-gear',
+    text: 'Settings'
+  } 
 ];
 
 function NavBar() {
@@ -64,14 +68,14 @@ const [showNavBar , setShowNavBar] =  useState(false)
               </li>
                     ))}
 
-              <li className='list mt-[10px]'>
+              {/* <li className='list mt-[10px]'>
                 <span className='sideBar_icon '>
                   <span><i className='fa-solid fa-ellipsis text-xs hover:bg-gray-700 rounded-full m-1 mr-4 py-[1.5px] px-[4px]  border-[3px]  '/></span> 
-                    <span className=' lg:inline-block hidden'>
+                    <span className={` lg:inline-block sm:hidden ${showNavBar ? "inline-block" :"hidden"} `} >
                     More  
                     </span>
                 </span>
-              </li>
+              </li> */}
 
               {/* button */}
               <li className="list"><button className='bg-[#3887ee] text-center font-bold w-[50px] lg:w-[80%] p-2 rounded-full mt-4'>
@@ -84,14 +88,13 @@ const [showNavBar , setShowNavBar] =  useState(false)
             </ul>
           </div>    
 
-
         {/* Profile box */}
           <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'>
-            <div className='m-1 border  rounded-full w-10 h-10'>
+            <div className='m-1 border rounded-full w-10 h-10'>
             {/* <img  ></img> */}
             </div>
             
-            <span className=' lg:flex hidden'>
+            <span className={`lg:flex sm:hidden ${ showNavBar ? 'flex' : 'hidden' }  `}>
               <div className='flex flex-col w-32 '>
                 <p><b>ABC Xyz </b></p>
                 <p className=' font-sans text-gray-400'>@NPM_run_Dev</p>
@@ -105,9 +108,10 @@ const [showNavBar , setShowNavBar] =  useState(false)
 
         </nav>
         
+        {/* Upper Bar */}
         <div className='sm:hidden block text-white bg-black  top-1'>
             <div className=' flex justify-center w-full relative p-3'>
-              <span className=' w-9 h-9 rounded-full border-2 absolute left-3'
+              <span className=' w-9 h-9 rounded-full border-2 absolute left-3 cursor-pointer'
                 onClick={() => {setShowNavBar(!showNavBar)}}></span>
               <span>
                   <i className='fa-brands fa-x-twitter text-3xl'></i>
@@ -116,9 +120,8 @@ const [showNavBar , setShowNavBar] =  useState(false)
         </div>
 
         {/* bg */}
-        <bg className={`h-full w-full fixed  blur-sm duration-200 z-40 ${showNavBar ? "block" : "hidden"} `}
-          onClick={()=> {setShowNavBar(false)} }/>
-
+        <bg className={`h-full w-full fixed bg-[#0000 00a1] duration-200 z-40 text-white ${showNavBar ? "block" : "hidden"} `}
+          onClick={()=> {setShowNavBar(false)} } />
         
     </>
   )

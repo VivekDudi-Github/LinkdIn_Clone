@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Bio_bar from './Bio_bar' 
 import { NavLink } from 'react-router-dom'
+import {Edit_Profile} from "../../index"
+
+import {ChangeEditProfile} from "../../Redux/componentSlice"
+import {useDispatch , useSelector} from "react-redux"
 
 function Centeral_Bar() {
+  const dispatch = useDispatch() ;
+
+
+//profile_edit page function
+  const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) 
+  const [openEditProfile , setOpenEditProfile] = useState(EditProfile_state)
+  console.log(openEditProfile);
+  
+  const EditFunc = () => {
+    dispatch(ChangeEditProfile(!EditProfile_state))
+    setOpenEditProfile(EditProfile_state)
+  }
+  
+
   return (
     <>
-      <div className='w-[50%] flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
+      <div className=' flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">
@@ -24,11 +42,19 @@ function Centeral_Bar() {
           </div>
           
           <div className='h-16 text-white text-right p-4'>
-              <button className='border-gray-700 border-[1px] rounded-full p-2 px-4 hover:bg-gray-900 duration-200 font-bold'
-              >Edit profile</button>
+                <button className='border-gray-700 border-[1px] rounded-full p-2 px-4 hover:bg-gray-900 duration-200 font-bold'
+                        onClick={() => EditFunc() }
+                    >
+                  Edit profile
+                </button>
           </div>
 
-            <Bio_bar/>
+            <span>
+              <Bio_bar/>
+            </span>
+              { openEditProfile ? <Edit_Profile/> : null }
+            
+            
 
           <div className='mx-auto'>
                     <input 
