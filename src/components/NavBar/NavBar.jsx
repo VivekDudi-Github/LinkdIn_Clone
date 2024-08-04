@@ -1,7 +1,7 @@
 import React , {useState} from 'react'
 import "./NavBar.css"
 import { NavLink } from 'react-router-dom';
-
+import Image from "../../assets/2a.jpg"
 
 const listItems = [
   {
@@ -49,7 +49,7 @@ const [showNavBar , setShowNavBar] =  useState(false)
     <>  
         
         <nav className={` fixed text-white h-full lg:w-[250px] sm:w-[80px] xl:left-[6.5svw] sm:left-[1svw] p-3 sm:flex flex-col justify-between duration-200
-                          border-r-2 border-gray-600 overflow-y-scroll overflow-x-hidden z-50 side_navbar ${showNavBar ? "animated" : ""} `}>
+                          border-r-2 border-gray-600 overflow-y-auto overflow-x-hidden z-50 side_navbar ${showNavBar ? "animated" : ""} `}>
           
         {/*Side icons */}  
           <div>
@@ -68,15 +68,6 @@ const [showNavBar , setShowNavBar] =  useState(false)
               </li>
                     ))}
 
-              {/* <li className='list mt-[10px]'>
-                <span className='sideBar_icon '>
-                  <span><i className='fa-solid fa-ellipsis text-xs hover:bg-gray-700 rounded-full m-1 mr-4 py-[1.5px] px-[4px]  border-[3px]  '/></span> 
-                    <span className={` lg:inline-block sm:hidden ${showNavBar ? "inline-block" :"hidden"} `} >
-                    More  
-                    </span>
-                </span>
-              </li> */}
-
               {/* button */}
               <li className="list"><button className='bg-[#3887ee] text-center font-bold w-[50px] lg:w-[80%] p-2 rounded-full mt-4'>
                 <span className=' lg:inline-block hidden'>
@@ -90,9 +81,8 @@ const [showNavBar , setShowNavBar] =  useState(false)
 
         {/* Profile box */}
           <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'>
-            <div className='m-1 border rounded-full w-10 h-10'>
+            <img className='m-1 rounded-full w-10 h-10 object-cover' src={Image} alt='profile_image' />
             {/* <img  ></img> */}
-            </div>
             
             <span className={`lg:flex sm:hidden ${ showNavBar ? 'flex' : 'hidden' }  `}>
               <div className='flex flex-col w-32 '>

@@ -13,7 +13,7 @@ const rooter = createBrowserRouter(
     <Route path='/' element={<App/>}>
       <Route path='/*' element={<Not_found/>} />
       <Route path='/sign_up' element={<Signup_home/>} />
-      <Route path='/home' element={<Home/>} />
+      <Route path='' element={<Home/>} />
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/edit_profile' element={<Edit_Profile/>}/>
     

@@ -30,7 +30,7 @@ function Centeral_Bar() {
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">
-               <NavLink to={'/home'}>
+               <NavLink to={'/'}>
                 <i className='fa-solid fa-arrow-left hover:bg-gray-900 duration-200 p-2 rounded-full ' ></i>
                </NavLink>
               </span>

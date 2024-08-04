@@ -1,12 +1,13 @@
 import React from 'react'
 import "./Post_Box.css"
+import Image from "../../assets/2a.jpg"
 
 function Create_Post() {
   return (
     <>
     <div className='flex  border-y-[0.5px] border-gray-600 pt-2 text-white  max-w-[800px]'>
         <div className=' w-16 p-2 pt-1 pb-3  '>
-            <img className='border rounded-full w-[40px] h-[40px] '></img>
+            <img className=' object-cover rounded-full w-[40px] h-[40px] 'src={Image} alt='Profile-Photo'/>
         </div>
 
         <div className='w-full'>

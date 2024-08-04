@@ -1,7 +1,7 @@
 import NavBar from "./components/NavBar/NavBar";
 import NavBar_down from "./components/NavBar/NavBar_down";
 
-import Centeral_Bar from "./components/Centeral Bar/Centeral_Bar"
+import Centeral_Bar from "./components/Profile/Centeral_Bar"
 import Right_bar from "./components/RightBar_widgets/Right_bar";
 
 import App_layout from "./components/Containers/App_layout";
