@@ -22,7 +22,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 const monthsWith31Days = ["January", "March", "May", "July", "August", "October", "December"];
 const monthsWith30Days = ["April", "June", "September", "November"];
 
-let [allDays , setAllDays] = useState([]) ;
+let [allDays , setAllDays] = useState(Array(31).fill(0).map((_, i) => i + 1)) ;
 
 useEffect(()=> {
     if(monthsWith31Days.includes(DoB.Month)){
@@ -107,9 +107,9 @@ useEffect(()=> {
                      {/* month */}
                          <div className='m-1 border-[1px] border-gray-600 focus-within:border-blue-500 text-xl '>
                              <select className=' p-2 bg-black outline-none scroll-none' placeholder="Month" 
-                                //  onChange={(e) => {
-                                //      setDoB({ ...DoB , Month : e.target.value}) }}
-                                  required>
+                                 onChange={(e) => {
+                                     setDoB({ ...DoB , Month : e.target.value}) }}
+                                  >
                                  { months.map((month) => 
                                      <option key={month} className='text-base'>{month}</option>)}
                              </select>
@@ -118,9 +118,9 @@ useEffect(()=> {
                      {/* Days */}
                          <div className='m-1 border-gray-600 border focus-within:border-blue-500 text-xl'>
                              <select className=' p-2 bg-black outline-none ' placeholder="Month" 
-                                //  onChange={(e) => {
-                                //      setDoB({...DoB , Day : e.target.value}) }}
-                                  required>
+                                 onChange={(e) => {
+                                     setDoB({...DoB , Day : e.target.value}) }}
+                                  >
  
                                  {allDays.map((day) => 
                                      <option key={day} className='text-sm'>{day}</option>)} 
@@ -133,10 +133,9 @@ useEffect(()=> {
                              <input className='bg-black outline-none w-24 p-2' placeholder='Year'
                                  defaultValue={'2000'}
                                  min={'1950'}
-                                //  max={new Date().getFullYear()}
+                                 max={new Date().getFullYear()}
                                  type='number' maxLength={4} 
-                                //  onChange={(e) => setDoB({...DoB , Year : e.target.value})}
-                                 required
+                                 onChange={(e) => setDoB({...DoB , Year : e.target.value})}
                              />  
                          </div>
                     </div> 

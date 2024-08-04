@@ -96,7 +96,7 @@ const openPassPage = (e)=> {
     const monthsWith31Days = ["January", "March", "May", "July", "August", "October", "December"];
     const monthsWith30Days = ["April", "June", "September", "November"];
 
-    let [allDays , setAllDays] = useState([]) ;
+    let [allDays , setAllDays] = useState(Array(31).fill(0).map((_ , i) => i +  1)) ;
 
     useEffect(()=> {
         if(monthsWith31Days.includes(DoB.Month)){
