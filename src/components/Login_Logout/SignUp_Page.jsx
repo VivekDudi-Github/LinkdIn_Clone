@@ -113,8 +113,8 @@ const openPassPage = (e)=> {
 
     return (
     <>
-<div className={` w-full fixed top-0 h-[100vh] bg-[#1f177443] justify-center items-center py-10 ${ open_close ? 'flex' : 'hidden'} `}>
-    <div className='bg-black rounded-2xl w-[37rem] h-[99%] flex flex-col items-center text-center py-2 pt-6 relative '>
+<div className={` w-full fixed top-0 h-[100vh] bg-[#1f177443] m-auto sm:py-10 ${ open_close ? 'flex' : 'hidden'} `}>
+    <div className='bg-black rounded-2xl w-full sm:w-[37rem] h-[99%] m-auto flex flex-col items-center text-center py-2 pt-6 relative overflow-auto '>
          
     {/* Upper portion  */}
           <button onClick={()=> {setOpen_close(false)
@@ -125,19 +125,19 @@ const openPassPage = (e)=> {
 
           <div><i className='fa-brands fa-x-twitter text-4xl mb-8'></i></div>
 
-            <div className='w-[60%] pl-6'>
+            <div className=' pl-6'>
                 <div className='text-3xl text-left font-bold mb-8 '>Create You Account</div>
             </div>
 
 
     {/* Form */}
-        <div className={`${open_close_password ? "hidden" : "flex flex-col"}`}>
-                <form onSubmit={openPassPage}>
+        <div className={`${open_close_password ? "hidden" : "flex flex-col"} items-center w-[70%]  `}>
+                <form className='' onSubmit={openPassPage}>
 
                     {/* Name */}
-                    <div className='border-[1px] border-gray-600 p-2 py-4 mb-8'>
+                    <div className='max-w-full border-[1px] border-gray-600 p-2 py-4 mb-8'>
                             <input 
-                                className=' w-96 bg-black focus:outline-none'
+                                className=' w-full bg-black focus:outline-none'
                                 onChange={(e) => setName(e.target.value) }
                                 placeholder='Name'
                                 type='text'
@@ -148,7 +148,7 @@ const openPassPage = (e)=> {
                     {/* Email */}
                     <div className='border-[1px] border-gray-600 p-2 py-4 mb-8'>
                             <input 
-                                className=' w-96 bg-black focus:outline-none '
+                                className=' w-full bg-black focus:outline-none '
                                 onChange={(e)=> setEmail(e.target.value)}
                                 placeholder='Email'
                                 type='email'
@@ -156,13 +156,13 @@ const openPassPage = (e)=> {
                                 />
                     </div>
 
-                    <div className='w-96 '>
+                    <div className='w-full '>
                         <div className=' text-base font-bold text-left '>Date of birth</div>
                         <div className=' text-xs text-left text-gray-600'>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</div>
                     </div>
 
                 {/* Date of Birth field */}
-                    <div className='flex w-96 justify-around my-8'>
+                    <div className='flex w-full justify-around my-8'>
                      
                     {/* month */}
                         <div className='m-1 border-[1px] border-gray-600 text-xl '>
@@ -203,7 +203,7 @@ const openPassPage = (e)=> {
                    
                     {/* Submit */}
                         <div>
-                            <button className=' bg-white rounded-full text-black font-sans font-bold p-4 my-2 w-[400px] hover:bg-gray-300 duration-200'
+                            <button className=' bg-white rounded-full text-black font-sans font-bold p-4 my-2 w-full hover:bg-gray-300 duration-200'
                                     type='submit'
                             >Next</button>
                         </div>
@@ -223,13 +223,13 @@ const openPassPage = (e)=> {
                                     <i className={` ${showPass ? "fa-eye-slash" : "fa-eye"} fa-regular  absolute text-xl right-4 top-1/3 `}></i>
                                     </span>
                                 <input 
-                                    className=' w-96 bg-black focus:outline-none'
+                                    className=' w-full bg-black focus:outline-none'
                                     onChange={(e) => setPassword1(e.target.value) }
                                     placeholder='Password'
                                     type={ showPass ? "text" : "password"}
                                     required/>
                         </div>
-                        <p className='w-96 text-xs text-left text-gray-600 mb-4'>Please keep your password strong.</p>
+                        <p className='w-full text-xs text-left text-gray-600 mb-4'>Please keep your password strong.</p>
                         <div className={`text-sm text-center text-red-500 ${IsPassMatch ? "hidden" : "block" }`}>Password didn't match</div>
                         
                     {/* Passwords2 */}
@@ -237,13 +237,13 @@ const openPassPage = (e)=> {
                         <div className='border-[1px] border-gray-600 p-2 py-4 mb-1 relative'>
                                   
                                 <input 
-                                    className=' w-96 bg-black focus:outline-none'
+                                    className=' w-full bg-black focus:outline-none'
                                     onChange={(e) => {setPassword2(e.target.value) ;}}
                                     placeholder='Confirm Password'
                                     type={showPass ? "text" : 'password'}
                                     required/>
                         </div>
-                        <p className='w-96 text-xs text-left text-gray-600 mb-4'>Confirm Your Password.</p>
+                        <p className='w-full text-xs text-left text-gray-600 mb-4'>Confirm Your Password.</p>
                    
                     {/* Submit */}
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Bio_bar from './Bio_bar' 
 import { NavLink } from 'react-router-dom'
 import {Edit_Profile} from "../../index"
+import image from "../../assets/2a.jpg"
 
 import {ChangeEditProfile} from "../../Redux/componentSlice"
 import {useDispatch , useSelector} from "react-redux"
@@ -13,17 +14,19 @@ function Centeral_Bar() {
 //profile_edit page function
   const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) 
   const [openEditProfile , setOpenEditProfile] = useState(EditProfile_state)
-  console.log(openEditProfile);
   
   const EditFunc = () => {
     dispatch(ChangeEditProfile(!EditProfile_state))
-    setOpenEditProfile(EditProfile_state)
   }
   
+  useEffect(()=> {
+    setOpenEditProfile(EditProfile_state)
+  } , [EditProfile_state])
+
 
   return (
     <>
-      <div className=' flex flex-col  pt-0 border-x-[1.5px] border-gray-700 '> 
+      <div className=' flex flex-col '> 
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
               <span class=" w-10 text-white ">
@@ -37,8 +40,11 @@ function Centeral_Bar() {
               </span>
           </div>
 
-          <div className='relative'><img className='h-56 w-full border '></img>
-            <img className='h-32 w-32 absolute inset-x-5 inset-y-36 rounded-full bg-gray-900 '></img>
+          <div className='relative'>
+            {/* <img className='h-[226px] w-full object-contain absolute z-30' src={image}/> */}
+            <img className='h-56 w-full object-cover ' src={image}/>
+            
+            <img className='h-32 w-32 absolute inset-x-5 inset-y-36 rounded-full bg-gray-900 object-cover' src={image}></img>
           </div>
           
           <div className='h-16 text-white text-right p-4'>

@@ -49,15 +49,16 @@ const handle_pass_page =() => {
 
   return (
     <>
-        <div className={` w-full fixed top-0 h-[100vh] bg-[#1f177443] justify-center items-center py-10 ${ open_close ? "flex" : "hidden"} `}> 
-            <div className='bg-black rounded-2xl w-[37rem] h-[99%] flex flex-col items-center text-center py-2 pt-6 relative '>
-                <button className="absolute top-2 left-2 p-3 py-1 text-lg rounded-full hover:bg-gray-600 duration-200 du"
+        <div className={` w-full fixed top-0 h-[100vh] bg-[#1f177443]  sm:py-10 ${ open_close ? "block" : "hidden"} `}> 
+            <div className='bg-black rounded-2xl w-full sm:w-[37rem] sm:h-[99%] py-2 flex flex-col items-center  m-auto relative overflow-auto'>
+                
+                <button className="absolute top-[4%] left-[2%] p-3 py-1 text-lg rounded-full hover:bg-gray-600 duration-200 "
                         onClick={()=> {setOpen_close(false)
                             setopenPassPage(false)
                         }}
                 ><i className='fa-solid fa-xmark text-white'></i></button>
                 
-                <div><i className='fa-brands fa-x-twitter text-4xl mb-8'></i></div>
+                <div className=''><i className='fa-brands fa-x-twitter text-4xl mb-8'></i></div>
 
 
                 <div className='w-[55%]'>

@@ -1,16 +1,3 @@
 .navbar_appLayout{
     display: block;
 }
-::-webkit-scrollbar {
-    width: 10px; /* Scrollbar width */
-}
-  
-::-webkit-scrollbar-thumb {
-background: #383636; /* Scrollbar thumb color */
-border-radius: 15px;
-}
-
-::-webkit-scrollbar-track {
-background: #141414; /* Scrollbar track color */
-
-}

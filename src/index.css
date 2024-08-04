@@ -5,3 +5,18 @@
 :root{
  box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+    border-radius: 5px;
+}
+  
+::-webkit-scrollbar-thumb {
+background: #383636; /* Scrollbar thumb color */
+border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+background: #000000; /* Scrollbar track color */
+border-radius: 5px;
+}
