@@ -64,7 +64,7 @@ const handleHidePass = () => {
                         alert("Logging IN")
                         await signInWithEmailAndPassword(Auth , response.user.email , Password1 )
                         alert("LoggedIn successfully")
-                        navigate("/")
+                        navigate("/profile")
                         
                     } catch (error) {
                        alert("error while adding the userCredentials") 

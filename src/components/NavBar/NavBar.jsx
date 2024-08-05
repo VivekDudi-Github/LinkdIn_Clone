@@ -73,7 +73,7 @@ const [showNavBar , setShowNavBar] =  useState(false)
                 <span className=' lg:inline-block hidden'>
                   Post
                 </span>
-                <i class="fa-solid fa-feather-pointed inline-block lg:hidden "></i>
+                <i className="fa-solid fa-feather-pointed inline-block lg:hidden "></i>
                 </button>
               </li>   
             </ul>
@@ -110,8 +110,8 @@ const [showNavBar , setShowNavBar] =  useState(false)
         </div>
 
         {/* bg */}
-        <bg className={`h-full w-full fixed bg-[#0000 00a1] duration-200 z-40 text-white ${showNavBar ? "block" : "hidden"} `}
-          onClick={()=> {setShowNavBar(false)} } />
+        <div className={`h-full w-full fixed bg-[#0000 00a1] duration-200 z-40 text-white ${showNavBar ? "block" : "hidden"} `}
+          onClick={()=> {setShowNavBar(false)} } ></div>
         
     </>
   )

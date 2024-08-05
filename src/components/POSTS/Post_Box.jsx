@@ -1,8 +1,12 @@
 import React from 'react'
 import "./Post_Box.css"
 import Image from "../../assets/2a.jpg"
+import { Auth } from '../../firebase_SDK'
 
 function Post_Box() {
+
+
+
   return (
     <>
       <div className= ' w-full border-b-[0.5px] border-gray-600 flex text-white max-w-[800px] '>

@@ -1,23 +1,35 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Auth } from '../../firebase_SDK'
+
 
 function Bio_bar() {
+const profileData = useSelector(state => state.UserSlice?.userData)
+
+const date = new Date(Auth?.currentUser?.metadata?.creationTime)
+
+
+
+const joinDate = (date.toLocaleDateString('en-Us' , {month : 'long' , year : 'numeric'}));
+
+
   return (
     <>
     <div className='text-white pl-4'>
-      <p className='font-bold text-xl'>ABC Xyz</p>
-      <p className='text-base text-gray-500 font-sans'>@NPM_run_Dev</p>
-      <p className='text-base py-2'>Tech Enthusiast <br/> A student <br/><br/>Learning along with You Friends  </p>
+      <p className='font-bold text-xl'>{profileData?.name || "Name" }</p>
+      <p className='text-base text-gray-500 font-sans'>{profileData?.userName || "@user_name"}</p>
+      <p className='text-base py-2'>{profileData?.bio}</p>
     </div>
 
     <div className='flex flex-wrap text-gray-500 text-base pl-2 '>
-      <div className='mr-2'><i className='fa-solid fa-location-dot mx-2'       /><span >India </span></div>
-      <div className='mr-2'><i class="fa-solid fa-link mx-2 "       /><a>github-abc-npm-run-dev.com</a></div>
-      <div className='mr-2'><i class="fa-solid fa-calendar-days mx-2"     /><span >Joined March 2020</span></div>
-      <div className='mr-2'><i className='fa-solid fa-check-to-slot mx-2'   /><span >Verified Phone Number</span></div>
+      {profileData?.location && <div className='mr-2'><i className='fa-solid fa-location-dot mx-2'       /><span >India </span></div>}
+      {profileData?.website &&  <div className='mr-2'><i className="fa-solid fa-link mx-2 "       /><a>github-abc-npm-run-dev.com</a></div>}
+      <div className='mr-2'><i className="fa-solid fa-calendar-days mx-2"     /><span >Joined {joinDate}</span></div>
+      {/* <div className='mr-2'><i className='fa-solid fa-check-to-slot mx-2'   /><span >Verified Phone Number</span></div> */}
     </div>
     <div className='my-2 text-white  '>
-      <span className='pl-4'><b>0</b><span className=' text-gray-500'> Following </span></span>
-      <span className='pl-4'><b>0</b><span className=' text-gray-500'> Followers </span></span>
+      <span className='pl-4'><b>{profileData?.following || 0}</b><span className=' text-gray-500'> Following </span></span>
+      <span className='pl-4'><b>{profileData?.followers || 0}</b><span className=' text-gray-500'> Followers </span></span>
     </div>
     </>
   )

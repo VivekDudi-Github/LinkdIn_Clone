@@ -4,14 +4,61 @@ import { NavLink } from 'react-router-dom'
 import {Edit_Profile} from "../../index"
 import image from "../../assets/2a.jpg"
 
-import {ChangeEditProfile} from "../../Redux/componentSlice"
+import {ChangeEditProfile} from "../../Redux/componentSlice" 
+import { adduserData } from '../../Redux/UserSlice'
 import {useDispatch , useSelector} from "react-redux"
+
+import { Auth , DB } from '../../firebase_SDK'
+import { onAuthStateChanged  } from 'firebase/auth'
+import { query , onSnapshot , collection , where  } from 'firebase/firestore'
+
+
 
 function Centeral_Bar() {
   const dispatch = useDispatch() ;
+  const [userId, setUserId] = useState(null)
+
+  const profileData = useSelector(state => state.UserSlice?.userData)
+  
 
 
-//profile_edit page function
+
+
+//func- fetch ProfileData
+const FetchUserData = () => {
+  const collectionRef = collection(DB , "user")
+const q = query(collectionRef  , where("userId" , "==" , userId ))
+  try {
+     onSnapshot(q , (QuerySnapshot) => {
+      QuerySnapshot.docs.forEach((item)=>  dispatch(adduserData(item.data())) )  ;
+    } )
+  } catch (error) {
+    console.log(error);
+  }
+}
+  useEffect(() => {
+    if(userId){
+      FetchUserData()
+    }else{
+      console.log("id didn't found");
+    }
+  } , [userId])
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(Auth , (user) => {
+      if(user){
+        setUserId(Auth.currentUser.uid) 
+      }else {
+        console.log("userIs not available")
+      }
+    })
+    return () => unsubscribe()
+  } , [])
+//  
+
+
+
+//func- profile_edit page toggle 
   const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) 
   const [openEditProfile , setOpenEditProfile] = useState(EditProfile_state)
   
@@ -29,14 +76,14 @@ function Centeral_Bar() {
       <div className=' flex flex-col '> 
 
           <div className='text-white flex  content-center mt-1 ml-2 '>
-              <span class=" w-10 text-white ">
+              <span className=" w-10 text-white ">
                <NavLink to={'/'}>
                 <i className='fa-solid fa-arrow-left hover:bg-gray-900 duration-200 p-2 rounded-full ' ></i>
                </NavLink>
               </span>
               <span className=' ml-8 flex flex-col'>
-                  <span className=' font-bold text-lg'>ABC Xyz</span> 
-                  <span className=' text-[0.7em] text-gray-500 font-normal'>0 posts</span>
+                  <span className=' font-bold text-lg'>{profileData?.name || "..."}</span> 
+                  <span className=' text-[0.7em] text-gray-500 font-normal'>{profileData?.posts || 0} posts</span>
               </span>
           </div>
 
