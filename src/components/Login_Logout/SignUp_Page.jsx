@@ -13,11 +13,13 @@ export default function SignUp_Page(props) {
 
     const [email , setEmail] = useState("")
     const [name  ,setName] = useState("")
+
+    
     
     const [DoB , setDoB] = useState({
         Year : 2000 , 
-        Day : "" , 
-        Month : "" , 
+        Day : "1" , 
+        Month : "January" , 
     }) 
 
 
@@ -53,7 +55,7 @@ const handleHidePass = () => {
                         name : name , 
                         email : response.user.email , 
                         userId : response.user.uid , 
-                        date : newTime(Timestamp) , 
+                        date : newTime(Timestamp.now()) , 
                         DOB : DoB ,
                     }
                     const CollectionRef = collection(DB , "user")
@@ -62,7 +64,7 @@ const handleHidePass = () => {
                         alert("Logging IN")
                         await signInWithEmailAndPassword(Auth , response.user.email , Password1 )
                         alert("LoggedIn successfully")
-                        navigate("/home")
+                        navigate("/")
                         
                     } catch (error) {
                        alert("error while adding the userCredentials") 

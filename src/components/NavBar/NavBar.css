@@ -30,11 +30,15 @@ bg{
 
 @media(max-width :639.9px){
     .side_navbar{
-        display: flex;
-        background-color: black;
         transform: translateX(-235px);
+        background-color: black;
+        display: flex;
     }
     .animated{
         transform: translateX(0px);
+    }
+
+    .nav_text{
+        display: hidden;
     }
 }

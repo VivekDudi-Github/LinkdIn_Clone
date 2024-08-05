@@ -6,6 +6,8 @@ const newTime = (timestamp) => {
     if(  timestamp){
     milliseconds = timestamp.seconds * 1000  + timestamp.nanoseconds / 1000000 ; 
     const full_date  =  new Date(milliseconds) ;
+    console.log(timestamp);
+    
     return { date : (full_date.getDate()) , month : (full_date.getMonth() + 1) , year : (full_date.getFullYear()) ,
                     hour : (full_date.getHours())  , minutes : (full_date.getMinutes()), 
     }

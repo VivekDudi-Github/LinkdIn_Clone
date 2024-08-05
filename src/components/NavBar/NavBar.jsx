@@ -49,7 +49,7 @@ const [showNavBar , setShowNavBar] =  useState(false)
     <>  
         
         <nav className={` fixed text-white h-full lg:w-[250px] sm:w-[80px] xl:left-[6.5svw] sm:left-[1svw] p-3 sm:flex flex-col justify-between duration-200
-                          border-r-2 border-gray-600 overflow-y-auto overflow-x-hidden z-50 side_navbar ${showNavBar ? "animated" : ""} `}>
+                          border-r-2 border-gray-600 overflow-y-auto overflow-x-hidden z-50 side_navbar ${showNavBar ? "animated" : ""}  `}>
           
         {/*Side icons */}  
           <div>
@@ -60,7 +60,7 @@ const [showNavBar , setShowNavBar] =  useState(false)
               <li className='list duration-200' key={index}>
                   <NavLink to={`/${item.text.toLowerCase()}`}>
                     <span  className='sideBar_icon'><i className={`${item.icon} icon`}/>
-                      <span className=' nav_text lg:inline-block sm:hidden' >
+                      <span className=' lg:inline-block sm:hidden nav_text' >
                         {item.text}
                       </span>
                     </span>
