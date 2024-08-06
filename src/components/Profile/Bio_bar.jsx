@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Auth } from '../../firebase_SDK'
 
@@ -22,8 +23,8 @@ const joinDate = (date.toLocaleDateString('en-Us' , {month : 'long' , year : 'nu
     </div>
 
     <div className='flex flex-wrap text-gray-500 text-base pl-2 '>
-      {profileData?.location && <div className='mr-2'><i className='fa-solid fa-location-dot mx-2'       /><span >India </span></div>}
-      {profileData?.website &&  <div className='mr-2'><i className="fa-solid fa-link mx-2 "       /><a>github-abc-npm-run-dev.com</a></div>}
+      {profileData?.location && <div className='mr-2'><i className='fa-solid fa-location-dot mx-2'       /><span >{profileData.location}</span></div>}
+      {profileData?.website &&  <div className='mr-2'><i className="fa-solid fa-link mx-2 "       /><Link to={`${profileData.website}`} target='_blank' className='text-blue-500 hover:underline'>{profileData.website.slice(0 ,16)}..</Link></div>}
       <div className='mr-2'><i className="fa-solid fa-calendar-days mx-2"     /><span >Joined {joinDate}</span></div>
       {/* <div className='mr-2'><i className='fa-solid fa-check-to-slot mx-2'   /><span >Verified Phone Number</span></div> */}
     </div>

@@ -17,11 +17,11 @@ function Create_Post() {
             </div>
             <div className='border-y border-gray-500 flex justify-between py-2 text-blue-500 '>
                 <div>
-                    <button class="fa-regular fa-image post_box_icons"></button>
-                    <button class="fa-solid fa-bars-progress post_box_icons"></button>
-                    <button class="fa-regular fa-face-smile post_box_icons"></button>
-                    <button class="fa-solid fa-calendar-week post_box_icons"></button>
-                    <button class="fa-solid fa-location-dot post_box_icons"></button>
+                    <button className="fa-regular fa-image post_box_icons"></button>
+                    <button className="fa-solid fa-bars-progress post_box_icons"></button>
+                    <button className="fa-regular fa-face-smile post_box_icons"></button>
+                    <button className="fa-solid fa-calendar-week post_box_icons"></button>
+                    <button className="fa-solid fa-location-dot post_box_icons"></button>
                 </div>
                <button className='bg-[#3887ee] text-center text-white font-bold rounded-full px-3 mx-2'
                 >Post

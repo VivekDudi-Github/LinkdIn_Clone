@@ -7,7 +7,7 @@ import { ChangeEditProfile } from '../../Redux/componentSlice'
 import { NavLink } from 'react-router-dom'
 
 import { DB , Auth } from '../../firebase_SDK'
-import { setDoc , query ,where ,  collection } from 'firebase/firestore'
+import { setDoc , query ,where ,  collection, getDocs } from 'firebase/firestore'
 
 
 
@@ -20,27 +20,27 @@ const EditProfile_state = useSelector(state => state?.comp?.isEditProfile)
 const prevUserData = useSelector(state => state?.UserSlice?.userData)
 
 
-//updateFunction
-//add getdoc and then getDocument ref (const docRef = querySnapshot.docs[0].ref;) and then use it for setDoc'sref
 
+//updateFunction
 const userId  = Auth.currentUser.uid
 
 const updateFunc = async (e) => {
     e.preventDefault() ;
     const collectionRef = collection(DB , "user" )
      const q = query( collectionRef , where( "userId" , "==" , userId))
-    try {
-        console.log("starting update");
-        await setDoc( q  , {...prevUserData ,  ...newUserData})
-        alert("updated")
-        console.log("updated Succesffully");
-        dispatch(ChangeEditProfile(false))
 
+    try {
+        const DocSnapshot = await getDocs(q) ;
+        if(DocSnapshot){
+            const docRef = DocSnapshot.docs[0].ref
+            await setDoc(docRef , {...prevUserData , ...newUserData})
+            alert("data updated")
+            dispatch(ChangeEditProfile(false))
+    }
     } catch (error) {
         console.log("error while updating data" , error)
     }
 }
-
 
 //Functionality for DOB Feild
 const [DOB , setDOB] = useState({
@@ -69,12 +69,37 @@ useEffect(()=> {
 } , [DOB.Month , DOB.Year])
 
 
-
+//newUserData
 const [newUserData , setnewUserData] = useState({
     DOB ,
  })
 
  
+//check for userName
+const [IsusernameAvailable , setIsUsername] = useState(true)
+
+const check_username = async(user_name)=> {
+    const collectionRef = collection(DB , "user")
+    try {   
+        const q = query(collectionRef , where( "username" , "==" , user_name) , where("userId" , "!=" , userId)) ;
+        const querysnapshot = await getDocs(q) 
+        if(querysnapshot.empty){
+            console.log("true");
+            
+            return setIsUsername(true)
+        }else{
+            return setIsUsername(false)
+        }
+    } catch (error) {
+        console.log("error while checking for the userName" , error);
+    } 
+}
+useEffect(() => {
+    
+    check_username(newUserData?.username)
+} , [newUserData?.username])
+
+
 
   return (
     <>
@@ -126,12 +151,11 @@ const [newUserData , setnewUserData] = useState({
                             defaultValue={prevUserData?.name}
                             required
                             />
-
-               
                 </div>
 
             {/* Username-Input */}
-                <div className=' h-16 p-2 mx-4 mb-8 text-gray-500 rounded-md border-[1px] border-gray-500 focus-within:text-blue-400  focus-within:border-blue-500 '>
+                {!IsusernameAvailable && <p className='text-red-500 pl-4'>Username NOT available</p>}
+                <div className={` h-16 p-2 mx-4 mb-8 text-gray-500 rounded-md border-[1px] border-gray-500 ${IsusernameAvailable ? "focus-within:text-blue-500 focus-within:border-blue-500 " : "focus-within:text-red-600 focus-within:border-red-500 "}  `}>
                     <div className=' text-sm flex justify-between '>
                         <p>Username</p>
                         <span className='focus-within:block'>0/50</span> 
@@ -178,7 +202,6 @@ const [newUserData , setnewUserData] = useState({
                     <input className='w-full bg-black outline-none text-white' 
                             onChange={(e) => setnewUserData({...newUserData , website : e.target.value})}
                             defaultValue={prevUserData?.website || ""}
-                            required
                             />
                 </div>
 
@@ -234,9 +257,9 @@ const [newUserData , setnewUserData] = useState({
                 </div>
                 <div className='px-4 py-1 text-lg hover:bg-[#080715] flex justify-between items-center duration-200'>
                     <p className='font-normal'>Display confirmed phone number mark</p>
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer"/>
-                        <div class="relative w-11 h-4 peer-focus:outline-none rounded-full peer bg-gray-700 peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[3px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <label className="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" className="sr-only peer"/>
+                        <div className="relative w-11 h-4 peer-focus:outline-none rounded-full peer bg-gray-700 peer-checked:after:translate-x-full  after:content-[''] after:absolute after:top-[3px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                     </label>
                 </div>
                 <div className='pl-4 mb-8 text-xs text-gray-600'>

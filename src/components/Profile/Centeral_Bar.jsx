@@ -53,23 +53,13 @@ const q = query(collectionRef  , where("userId" , "==" , userId ))
       }
     })
     return () => unsubscribe()
-  } , [])
-//  
+  } , []) 
 
 
 
-//func- profile_edit page toggle 
-  const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) 
-  const [openEditProfile , setOpenEditProfile] = useState(EditProfile_state)
-  
-  const EditFunc = () => {
-    dispatch(ChangeEditProfile(!EditProfile_state))
-  }
-  
-  useEffect(()=> {
-    setOpenEditProfile(EditProfile_state)
-  } , [EditProfile_state])
 
+//profile_edit page 
+  const EditProfile_state = useSelector(state => state.comp?.isEditProfile) 
 
   return (
     <>
@@ -96,7 +86,7 @@ const q = query(collectionRef  , where("userId" , "==" , userId ))
           
           <div className='h-16 text-white text-right p-4'>
                 <button className='border-gray-700 border-[1px] rounded-full p-2 px-4 hover:bg-gray-900 duration-200 font-bold'
-                        onClick={() => EditFunc() }
+                        onClick={() => dispatch(ChangeEditProfile(true)) }
                     >
                   Edit profile
                 </button>
@@ -105,7 +95,7 @@ const q = query(collectionRef  , where("userId" , "==" , userId ))
             <span>
               <Bio_bar/>
             </span>
-              { openEditProfile ? <Edit_Profile/> : null }
+              { EditProfile_state ? <Edit_Profile/> : null }
             
             
 
