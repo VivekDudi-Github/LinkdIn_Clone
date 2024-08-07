@@ -119,7 +119,7 @@ useEffect(() => {
                     <button className='  px-4 pb-[4px] text-sm rounded-full bg-white text-black hover:bg-gray-300 duration-150 '
                             type='submit'
                             disabled={IsusernameAvailable}>
-                        <b>Save</b>
+                        <b>Save</b> 
                     </button>
                 </div>
 
