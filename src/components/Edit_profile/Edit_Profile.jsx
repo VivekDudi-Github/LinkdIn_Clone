@@ -7,13 +7,15 @@ import { ChangeEditProfile } from '../../Redux/componentSlice'
 import { NavLink } from 'react-router-dom'
 
 import { DB , Auth } from '../../firebase_SDK'
-import { setDoc , query ,where ,  collection, getDocs } from 'firebase/firestore'
+import { setDoc , query ,where ,  collection, getDocs   } from 'firebase/firestore'
+import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage"
 
 
 
 function Edit_Profile() {
-const MainPicRef = useRef()
-const BannerRef = useRef()
+const MainPicRef = useRef() ;
+const BannerRef = useRef() ;
+const storage = getStorage() ;
 const dispatch = useDispatch() ;
 const EditProfile_state = useSelector(state => state?.comp?.isEditProfile)
 
@@ -84,7 +86,6 @@ const check_username = async(user_name)=> {
         const q = query(collectionRef , where( "username" , "==" , user_name) , where("userId" , "!=" , userId)) ;
         const querysnapshot = await getDocs(q) 
         if(querysnapshot.empty){
-            console.log("true");
             
             return setIsUsername(true)
         }else{
@@ -99,8 +100,13 @@ useEffect(() => {
     check_username(newUserData?.username)
 } , [newUserData?.username])
 
-const uploadBanner = async () => {
-
+const uploadBanner = async (e) => {
+    const value = e.target.value
+    // if(value ){
+        
+    // }
+    console.log(value?.name);
+    
 }
 
 const uploadProfilePhoto = async () => {
@@ -135,7 +141,7 @@ const uploadProfilePhoto = async () => {
                 <div className='w-full border-gray-500 h-40 relative mb-32 '>
                         <img className=' object-contain w-[101%] h-[101%] absolute z-30' src={image} alt="photo" />
                     <img className=' object-cover blur-sm w-full h-full  ' src={image} alt="photo" />
-                     <i className="fa-solid absolute top-[32%] left-[45%] fa-camera-rotate text-2xl text-white bg-[#43414191] p-3 rounded-full z-50 hover:cursor-pointer " onClick={() => BannerRef.current.click()} />    
+                     <i className="fa-solid absolute top-[32%] left-[45%] fa-camera-rotate text-2xl text-white bg-[#43414191] p-3 rounded-full z-40 hover:cursor-pointer " onClick={() => BannerRef.current.click()} />    
                         <input className='hidden' ref={BannerRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gi' 
                                 onChange={uploadBanner}/> 
 
