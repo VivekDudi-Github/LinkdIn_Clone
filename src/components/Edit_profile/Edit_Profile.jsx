@@ -92,21 +92,32 @@ const check_username = async(user_name)=> {
             return setIsUsername(false)
         }
     } catch (error) {
-        console.log("error while checking for the userName" , error);
+        // console.log("error while checking for the userName" , error);
     } 
 }
 useEffect(() => {
-    
     check_username(newUserData?.username)
-} , [newUserData?.username])
+} , [newUserData.username])
+
 
 const uploadBanner = async (e) => {
-    const value = e.target.value
-    // if(value ){
-        
-    // }
-    console.log(value?.name);
+    console.log("func started");
     
+    const value = e.target.value
+    if(value){
+        console.log('value got');
+        
+        const storageRef = ref(storage , `${value}`)
+        try {
+            console.log('tyring upload');
+            uploadBytes(storageRef , file).then((snapshot) => {
+                console.log('Uploaded the File!' , snapshot);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 const uploadProfilePhoto = async () => {
