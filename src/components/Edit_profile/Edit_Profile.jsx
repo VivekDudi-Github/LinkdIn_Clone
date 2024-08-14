@@ -75,7 +75,7 @@ useEffect(()=> {
 //newUserData
 const [newUserData , setnewUserData] = useState({
     DOB ,
- })
+ }) 
 
  
 //check for userName
