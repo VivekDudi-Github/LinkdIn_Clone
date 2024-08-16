@@ -17,9 +17,9 @@ const MainPicRef = useRef() ;
 const BannerRef = useRef() ;
 const storage = getStorage() ;
 const dispatch = useDispatch() ;
-const EditProfile_state = useSelector(state => state?.comp?.isEditProfile)
+const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) ;
 
-const prevUserData = useSelector(state => state?.UserSlice?.userData)
+const prevUserData = useSelector(state => state?.UserSlice?.userData) ;
 
 
 
@@ -102,27 +102,33 @@ useEffect(() => {
 
 
 const uploadBanner = async (e) => {
-    console.log("func started");
-    
     const value = e.target.value
     if(value){
-        console.log('value got');
         
         const storageRef = ref(storage , `${value}`)
         try {
-            console.log('tyring upload');
-            uploadBytes(storageRef , file).then((snapshot) => {
+            uploadBytes(storageRef , value).then((snapshot) => {
                 console.log('Uploaded the File!' , snapshot);
             })
         } catch (error) {
-            console.log(error);
+            console.log( "error while uploading the background banner" ,  error);
         }
     }
-
 }
 
 const uploadProfilePhoto = async () => {
-
+    const value = e.target.value
+    if(value){
+        
+        const storageRef = ref(storage , `${value}`)
+        try {
+            uploadBytes(storageRef , value).then((snapshot) => {
+                console.log('Uploaded the File!' , snapshot);
+            })
+        } catch (error) {
+            console.log( "error while uploading the profile picture" ,  error);
+        }
+    }
 }
 
 
