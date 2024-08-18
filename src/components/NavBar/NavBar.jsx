@@ -1,12 +1,14 @@
 import React , {useState} from 'react'
 import "./NavBar.css"
 import { NavLink } from 'react-router-dom';
-import Image from "../../assets/2a.jpg"
+// import Image from "../../assets/2a.jpg"
+import { useSelector } from 'react-redux';
 
 const listItems = [
   {
     icon: 'fa-solid fa-house',
-    text: 'Home'
+    text: 'Home' ,
+    link : '/'
   },
   {
     icon: 'fa-solid fa-magnifying-glass',
@@ -44,10 +46,10 @@ const listItems = [
 
 function NavBar() {
 const [showNavBar , setShowNavBar] =  useState(false)
+const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
 
   return (
     <>  
-        
         <nav className={` fixed text-white h-full lg:w-[250px] sm:w-[80px] xl:left-[6.5svw] sm:left-[1svw] p-3 sm:flex flex-col justify-between duration-200
                           border-r-2 border-gray-600 overflow-y-auto overflow-x-hidden z-50 side_navbar ${showNavBar ? "animated" : ""}  `}>
           
@@ -56,9 +58,10 @@ const [showNavBar , setShowNavBar] =  useState(false)
             <ul className='flex-col flex '>
               <li className='list'> <i className='fa-brands fa-x-twitter text-3xl hover:bg-gray-700 rounded-xl py-1 px-2 mb-1 ml-1'></i></li>
 
+
                       { listItems.map((item , index) => (
               <li className='list duration-200' key={index}>
-                  <NavLink to={`/${item.text.toLowerCase()}`}>
+                  <NavLink to={ item.link || `/${item.text.toLowerCase()}`}>
                     <span  className='sideBar_icon'><i className={`${item.icon} icon`}/>
                       <span className=' lg:inline-block sm:hidden nav_text' >
                         {item.text}
@@ -81,7 +84,7 @@ const [showNavBar , setShowNavBar] =  useState(false)
 
         {/* Profile box */}
           <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'>
-            <img className='m-1 rounded-full w-10 h-10 object-cover' src={Image} alt='profile_image' />
+            <img className='m-1 rounded-full w-10 h-10 object-cover' src={profileImage} alt='profile_image' />
             {/* <img  ></img> */}
             
             <span className={`lg:flex sm:hidden ${ showNavBar ? 'flex' : 'hidden' }  `}>

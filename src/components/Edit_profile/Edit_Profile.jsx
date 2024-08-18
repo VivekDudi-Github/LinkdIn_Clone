@@ -22,6 +22,8 @@ const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) ;
 const prevUserData = useSelector(state => state?.UserSlice?.userData) ;
 
 
+const Doc_ID = useSelector(state => state.UserSlice?.userData?.docId)
+
 const [banner_downloadURL , setbanner_downloadURL] =  useState(prevUserData?.banner)
 const [profileImage , setProfileImage] = useState(prevUserData?.mainImage)
 
@@ -51,8 +53,9 @@ const updateFunc = async (e) => {
 const [DOB , setDOB] = useState({
     Year : prevUserData.DOB.Year , 
     Day : prevUserData.DOB.Day , 
-    Month : "prevUserData.DOB.Month" , 
+    Month : prevUserData.DOB.Month , 
 }) 
+
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -76,7 +79,6 @@ useEffect(()=> {
 
 //newUserData
 const [newUserData , setnewUserData] = useState({
-    DOB ,
  }) 
 
  
@@ -109,10 +111,10 @@ const uploadBanner = async (e) => {
     const value = e.target.files[0]
     if(value){
         
-        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value }.jpg`)
+        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value.name }.jpg`)
         try {
-            uploadBytes(storageRef , value).then((snapshot) => {
-                console.log('Uploaded the File!' , snapshot);
+            uploadBytes(storageRef , value).then(() => {
+                console.log('Uploaded the File!' );
                 getDownloadURL(storageRef).then((url)=> {
                     setbanner_downloadURL(url) 
             })
@@ -124,7 +126,6 @@ const uploadBanner = async (e) => {
     }
 }
 
-const Doc_ID = useSelector(state => state.UserSlice?.userData?.docId)
 useEffect (()=> {
     if(Doc_ID)
         try {
@@ -137,23 +138,37 @@ useEffect (()=> {
 } , [banner_downloadURL])
 
 
-
 // profile photo upload func
 const uploadProfilePhoto = async (e) => {
     const value = e.target.files[0]
     if(value){
         
-        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value }.jpg`)
+        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value.name }.jpg`)
         try {
-            uploadBytes(storageRef , value).then((snapshot) => {
+            uploadBytes(storageRef , value).then(() => {
+                console.log('main image uploaded');
+                getDownloadURL(storageRef ).then((url)=> 
+                setProfileImage(url))
             })
         } catch (error) {
             console.log( "error while uploading the profile picture" ,  error);
             alert('failed to upload the profile pic')
         }
+    }else{
+        console.log("value didn't found");
+        
     }
 }
 
+useEffect(() => {
+    if(Doc_ID)
+        try {
+            const docRef = doc(DB , 'user' , Doc_ID)
+            updateDoc(docRef , { mainImage : profileImage || "" })
+        } catch (error) {
+            console.log('failed to update the main Image');
+        }
+} , [profileImage])
 
 
   return (
@@ -276,7 +291,10 @@ const uploadProfilePhoto = async (e) => {
                             <select className=' p-2 bg-black outline-none scroll-none' placeholder="Month" 
                                 defaultValue={prevUserData?.DOB?.Month}
                                 onChange={(e) => {
-                                    setDOB({ ...DOB , Month : e.target.value}) }}
+                                    const updatedDOB = { ...DOB, Month: e.target.value };
+                                        setDOB(updatedDOB);
+                                        setnewUserData({ ...newUserData, DOB: updatedDOB });
+                                }} 
                                 >
                                 { months.map((month) => 
                                     <option key={month} className='text-base'>{month}</option>)}
@@ -288,23 +306,28 @@ const uploadProfilePhoto = async (e) => {
                             <select className=' p-2 bg-black outline-none ' placeholder="Month" 
                                 defaultValue={prevUserData?.DOB?.Day}
                                 onChange={(e) => {
-                                    setDOB({...DOB , Day : e.target.value}) }}
+                                    const updatedDOB = { ...DOB, Day: e.target.value };
+                                        setDOB(updatedDOB);
+                                        setnewUserData({ ...newUserData, DOB: updatedDOB });
+                                }}
                                 >
-
                                 {allDays.map((day) => 
                                     <option key={day} className='text-sm'>{day}</option>)} 
-
                             </select>
                         </div>
                     
                     {/* Year */}
-                        <div className='  m-1 border-[1px] border-gray-600 text-xl focus-within:border-blue-500 '>
+                        <div className=' m-1 border-[1px] border-gray-600 text-xl focus-within:border-blue-500 '>
                             <input className='bg-black outline-none w-24 p-2' placeholder='Year'
                                 defaultValue={prevUserData?.DOB?.Year}
                                 min={'1950'}
                                 max={new Date().getFullYear()}
                                 type='number' maxLength={4} 
-                                onChange={(e) => setDOB({...DOB , Year : e.target.value})}
+                                onChange={(e) =>{ 
+                                    const updatedDOB = { ...DOB, Year: e.target.value };
+                                    setDOB(updatedDOB);
+                                    setnewUserData({ ...newUserData, DOB: updatedDOB });
+                            }}
                             />  
                         </div>
                 </div> 
