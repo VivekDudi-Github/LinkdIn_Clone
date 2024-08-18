@@ -30,7 +30,7 @@ const FetchUserData = () => {
 const q = query(collectionRef  , where("userId" , "==" , userId ))
   try {
      onSnapshot(q , (QuerySnapshot) => {
-      QuerySnapshot.docs.forEach((item)=>  dispatch(adduserData(item.data())) )  ;
+      QuerySnapshot.docs.forEach((item)=>  dispatch(adduserData({...item.data() , docId : item.id})) )  ;
     } )
   } catch (error) {
     console.log(error);
@@ -79,7 +79,7 @@ const q = query(collectionRef  , where("userId" , "==" , userId ))
 
           <div className='relative'>
             {/* <img className='h-[226px] w-full object-contain absolute z-30' src={image}/> */}
-            <img className='h-56 w-full object-cover ' src={image}/>
+            <img className='h-56 w-full object-cover ' src={profileData.banner}/>
             
             <img className='h-32 w-32 absolute inset-x-5 inset-y-36 rounded-full bg-gray-900 object-cover' src={image}></img>
           </div>

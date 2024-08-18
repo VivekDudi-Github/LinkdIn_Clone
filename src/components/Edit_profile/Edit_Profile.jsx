@@ -7,7 +7,7 @@ import { ChangeEditProfile } from '../../Redux/componentSlice'
 import { NavLink } from 'react-router-dom'
 
 import { DB , Auth } from '../../firebase_SDK'
-import { setDoc , query ,where ,  collection, getDocs   } from 'firebase/firestore'
+import { setDoc , query ,where ,  collection, getDocs, Timestamp, updateDoc, doc   } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage"
 
 
@@ -22,15 +22,17 @@ const EditProfile_state = useSelector(state => state?.comp?.isEditProfile) ;
 const prevUserData = useSelector(state => state?.UserSlice?.userData) ;
 
 
-
+const [banner_downloadURL , setbanner_downloadURL] =  useState(prevUserData?.banner)
+const [profileImage , setProfileImage] = useState(prevUserData?.mainImage)
 
 //updateFunction
 const userId  = Auth.currentUser.uid
 
 const updateFunc = async (e) => {
     e.preventDefault() ;
+    
     const collectionRef = collection(DB , "user" )
-     const q = query( collectionRef , where( "userId" , "==" , userId))
+    const q = query( collectionRef , where( "userId" , "==" , userId))
 
     try {
         const DocSnapshot = await getDocs(q) ;
@@ -101,32 +103,53 @@ useEffect(() => {
 } , [newUserData.username])
 
 
+
+//banner update func
 const uploadBanner = async (e) => {
-    const value = e.target.value
+    const value = e.target.files[0]
     if(value){
         
-        const storageRef = ref(storage , `${value}`)
+        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value }.jpg`)
         try {
             uploadBytes(storageRef , value).then((snapshot) => {
                 console.log('Uploaded the File!' , snapshot);
+                getDownloadURL(storageRef).then((url)=> {
+                    setbanner_downloadURL(url) 
+            })
             })
         } catch (error) {
             console.log( "error while uploading the background banner" ,  error);
+            alert('failed to update the profile pic')
         }
     }
 }
 
-const uploadProfilePhoto = async () => {
-    const value = e.target.value
+const Doc_ID = useSelector(state => state.UserSlice?.userData?.docId)
+useEffect (()=> {
+    if(Doc_ID)
+        try {
+            const docRef = doc(DB , 'user' , Doc_ID)
+            updateDoc(docRef , { banner : banner_downloadURL || "" })
+        } catch (error) {
+            console.log( "error while setting up the banner for profile" , error);
+            alert('failed to update the profile pic')
+        }
+} , [banner_downloadURL])
+
+
+
+// profile photo upload func
+const uploadProfilePhoto = async (e) => {
+    const value = e.target.files[0]
     if(value){
         
-        const storageRef = ref(storage , `${value}`)
+        const storageRef = ref(storage , `images/profileImages/${Timestamp.now() + value }.jpg`)
         try {
             uploadBytes(storageRef , value).then((snapshot) => {
-                console.log('Uploaded the File!' , snapshot);
             })
         } catch (error) {
             console.log( "error while uploading the profile picture" ,  error);
+            alert('failed to upload the profile pic')
         }
     }
 }
@@ -150,21 +173,22 @@ const uploadProfilePhoto = async () => {
                     </span>
                     <button className='  px-4 pb-[4px] text-sm rounded-full bg-white text-black hover:bg-gray-300 duration-150 '
                             type='submit'
-                            disabled={IsusernameAvailable}>
+                            disabled={!IsusernameAvailable}>
                         <b>Save</b> 
                     </button>
                 </div>
 
             {/* Profiile-Photos */}
+                {/* Banner */}
                 <div className='w-full border-gray-500 h-40 relative mb-32 '>
-                        <img className=' object-contain w-[101%] h-[101%] absolute z-30' src={image} alt="photo" />
-                    <img className=' object-cover blur-sm w-full h-full  ' src={image} alt="photo" />
+                        <img className=' object-contain w-[101%] h-[101%] absolute z-30' src={banner_downloadURL} alt="photo" />
+                    <img className=' object-cover blur-sm w-full h-full  ' src={banner_downloadURL} alt="photo" />
                      <i className="fa-solid absolute top-[32%] left-[45%] fa-camera-rotate text-2xl text-white bg-[#43414191] p-3 rounded-full z-40 hover:cursor-pointer " onClick={() => BannerRef.current.click()} />    
                         <input className='hidden' ref={BannerRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gi' 
                                 onChange={uploadBanner}/> 
-
+                {/* Main Pic */}
                     <div className='w-36 h-36 absolute rounded-full top-[70%] left-4 bg-black flex justify-center items-center z-40 '>
-                        <img className='object-cover rounded-full w-full h-full ' src={image} />
+                        <img className='object-cover rounded-full w-full h-full ' src={profileImage} />
                             <i className="fa-solid absolute top-[32%] fa-camera-rotate text-2xl text-white bg-[#43414191] p-3 rounded-full hover:cursor-pointer" 
                                 onClick={() => MainPicRef.current.click()}
                                 />
