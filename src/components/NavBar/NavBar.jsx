@@ -1,8 +1,8 @@
 import React , {useState} from 'react'
 import "./NavBar.css"
 import { NavLink } from 'react-router-dom';
-// import Image from "../../assets/2a.jpg"
 import { useSelector } from 'react-redux';
+import NavBarLogOutBox from './NavBarLogOutBox';
 
 const listItems = [
   {
@@ -85,7 +85,6 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
         {/* Profile box */}
           <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'>
             <img className='m-1 rounded-full w-10 h-10 object-cover' src={profileImage} alt='profile_image' />
-            {/* <img  ></img> */}
             
             <span className={`lg:flex sm:hidden ${ showNavBar ? 'flex' : 'hidden' }  `}>
               <div className='flex flex-col w-32 '>
@@ -98,7 +97,7 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
               </div>
             </span>
           </div>
-
+          <NavBarLogOutBox/>
         </nav>
         
         {/* Upper Bar */}
@@ -114,7 +113,9 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
 
         {/* bg */}
         <div className={`h-full w-full fixed bg-[#0000 00a1] duration-200 z-40 text-white ${showNavBar ? "block" : "hidden"} `}
-          onClick={()=> {setShowNavBar(false)} } ></div>
+          onClick={()=> {setShowNavBar(false)} } >
+          
+        </div>
         
     </>
   )

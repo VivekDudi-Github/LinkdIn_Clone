@@ -11,8 +11,8 @@ function Create_Post() {
         </div>
 
         <div className='w-full'>
-            <div className='text-white py-3'>
-                <input className='bg-black w-full focus:outline-none'
+            <div className='text-white pt-3 '>
+                <textarea className='bg-black w-full focus:outline-none'
                 placeholder='What is happening?!'/>
             </div>
             <div className='border-y border-gray-500 flex justify-between py-2 text-blue-500 '>
