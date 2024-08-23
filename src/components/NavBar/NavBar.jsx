@@ -70,6 +70,7 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
                   </NavLink>    
               </li>
                     ))}
+                    
 
               {/* button */}
               <li className="list"><button className='bg-[#3887ee] text-center font-bold w-[50px] lg:w-[80%] p-2 rounded-full mt-4'>
