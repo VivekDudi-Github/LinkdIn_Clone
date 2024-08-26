@@ -34,6 +34,18 @@ function Centeral_Bar() {
               </span>
           </div>
 
+          <div className='text-white flex  content-center mt-1 ml-2 '>
+              <span className=" w-10 text-white ">
+               <NavLink to={'/'}>
+                <i className='fa-solid fa-arrow-left hover:bg-gray-900 duration-200 p-2 rounded-full ' ></i>
+               </NavLink>
+              </span>
+              <span className=' ml-8 flex flex-col'>
+                  <span className=' font-bold text-lg'>{profileData?.name || "..."}</span> 
+                  <span className=' text-[0.7em] text-gray-500 font-normal'>{profileData?.posts || 0} posts</span>
+              </span>
+          </div>
+
           <div className='relative'>
             <img className='h-56 w-full object-cover ' src={profileData?.banner}/>
             
