@@ -14,9 +14,9 @@ const componentSlice = createSlice({
         } ,
         ChangeLogOutBox : (state , action) => {
             state.isLogOutBox = action.payload
-        }
+        } , 
     }
 })
 
-export const {ChangeEditProfile , ChangeLogOutBox} = componentSlice.actions
+export const {ChangeEditProfile , ChangeLogOutBox } = componentSlice.actions
 export default componentSlice.reducer

@@ -105,26 +105,7 @@ useEffect(() => {
 } , [newUserData.username])
 
 ///
-try {   
-    const q = query(collectionRef , where( "username" , "==" , user_name) , where("userId" , "!=" , userId)) ;
-    const querysnapshot = await getDocs(q) 
-    if(querysnapshot.empty){
-        
-        return setIsUsername(true)
-    }else{
-        return setIsUsername(false)
-    }
-} catch (error) {
-    // console.log("error while checking for the userName" , error);
-} 
-}
-useEffect(() => {
-check_username(newUserData?.username)
-} , [newUserData.username])
 
-
-
-///
 //banner update func
 const uploadBanner = async (e) => {
     const value = e.target.files[0]

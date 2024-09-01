@@ -42,3 +42,23 @@ bg{
         display: hidden;
     }
 }
+
+
+.logoutBox{
+    transition : 0.2s ease-in-out;
+    box-shadow: 1px 1px 10px #424242 , -1px -1px 10px #424242 ;
+    transform: translateY(70px) translateX(30px) scale(0) ;
+    left: inherit;
+}
+
+@media(max-width : 1023.9px){
+    .logoutBox{
+        transform: translateY(70px) translateX(-140px) scale(0)
+    }
+}
+
+.animate_logoutbox{
+    transition-duration: 200ms ;
+    transform: translateY(0px) translateX(0px) scale(1);
+}
+

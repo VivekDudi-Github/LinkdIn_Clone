@@ -1,8 +1,9 @@
 import React , {useState} from 'react'
 import "./NavBar.css"
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch } from 'react-redux';
 import NavBarLogOutBox from './NavBarLogOutBox';
+import { ChangeLogOutBox } from '../../Redux/componentSlice';
 
 const listItems = [
   {
@@ -48,6 +49,9 @@ function NavBar() {
 const [showNavBar , setShowNavBar] =  useState(false)
 const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
 
+const dispatch = useDispatch() ; 
+const isLogOutBox = useSelector(state => state.comp?.isLogOutBox) ;
+
   return (
     <>  
         <nav className={` fixed text-white h-full lg:w-[250px] sm:w-[80px] xl:left-[6.5svw] sm:left-[1svw] p-3 sm:flex flex-col justify-between duration-200
@@ -84,7 +88,9 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
           </div>    
 
         {/* Profile box */}
-          <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'>
+          <div className=' w-full py-2 flex rounded-full hover:bg-[#181717]'
+                onClick={() => dispatch(ChangeLogOutBox(!isLogOutBox))}  
+          >
             <img className='m-1 rounded-full w-10 h-10 object-cover' src={profileImage} alt='profile_image' />
             
             <span className={`lg:flex sm:hidden ${ showNavBar ? 'flex' : 'hidden' }  `}>
@@ -98,7 +104,12 @@ const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
               </div>
             </span>
           </div>
-          <NavBarLogOutBox/>
+         
+            <div className=' absolute duration-200'>
+                <NavBarLogOutBox/> 
+            </div>
+         
+
         </nav>
         
         {/* Upper Bar */}
