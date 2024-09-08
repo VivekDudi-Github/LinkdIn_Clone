@@ -6,6 +6,8 @@ import Right_bar from "./components/RightBar_widgets/Right_bar";
 
 import App_layout from "./components/Containers/App_layout";
 import Post_Container from "./components/POSTS/Post_Container";
+import InPagebox_layout from "./components/Containers/InPagebox_layout";
+
 import Create_Post from "./components/POSTS/Create_Post";
 import Post_Box from "./components/POSTS/Post_Box";
 import Edit_Profile from "./components/Edit_profile/Edit_Profile";
@@ -15,9 +17,10 @@ export {
         NavBar_down ,
         Edit_Profile ,
         
+        App_layout  ,      
+        InPagebox_layout , 
         
         Centeral_Bar ,
-        App_layout  ,      
         Right_bar ,
 
         Post_Container ,

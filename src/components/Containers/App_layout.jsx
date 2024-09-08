@@ -6,7 +6,7 @@ function App_layout({children}) {
 
   return (
     <>
-    <div className=' justify-start xl:ml-[26svw] lg:ml-[260px] sm:ml-[89px] duration-200 sm:flex flex-col '>
+    <div className=' justify-start xl:ml-[26vw] lg:ml-[260px] sm:ml-[89px] duration-200 sm:flex flex-col '>
       
       
     {children}
