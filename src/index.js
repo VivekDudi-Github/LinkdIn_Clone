@@ -8,6 +8,7 @@ import App_layout from "./components/Containers/App_layout";
 import Post_Container from "./components/POSTS/Post_Container";
 import InPagebox_layout from "./components/Containers/InPagebox_layout";
 
+import Create_Post_Page from "./components/POSTS/Create_Post_Page";
 import Create_Post from "./components/POSTS/Create_Post";
 import Post_Box from "./components/POSTS/Post_Box";
 import Edit_Profile from "./components/Edit_profile/Edit_Profile";
@@ -26,6 +27,7 @@ export {
         Post_Container ,
         Post_Box , 
         Create_Post ,
-
+        Create_Post_Page ,
+        
 
 }

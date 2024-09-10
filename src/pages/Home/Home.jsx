@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
         <App_layout>
-        <InPagebox_layout/>
+        {/* <InPagebox_layout/> */}
         <NavBar/>
         <NavBar_down/>
                 <Post_Container>

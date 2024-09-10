@@ -1,7 +1,9 @@
 import React from 'react'
 import "./Post_Box.css"
 import Image from "../../assets/2a.jpg"
+import {Create_Post_Page} from '../../index'
 import { useSelector } from 'react-redux'
+
 
 function Create_Post() {
     const userImage = useSelector(state => state.UserSlice?.userData?.mainImage)
@@ -32,6 +34,7 @@ function Create_Post() {
             </div>
         </div>
     </div>
+    <Create_Post_Page/>
     </>
   )
 }
