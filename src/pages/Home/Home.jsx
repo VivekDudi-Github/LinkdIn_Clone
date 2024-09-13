@@ -1,5 +1,5 @@
 import React from 'react'
-import { Post_Container , Create_Post , Right_bar, App_layout, Post_Box ,NavBar , NavBar_down , InPagebox_layout } from "../../index"
+import { Post_Container , Create_Post , Right_bar, App_layout, Post_Box ,NavBar , NavBar_down  } from "../../index"
 
 function Home() {
   return (

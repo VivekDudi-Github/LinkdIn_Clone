@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isEditProfile : false , 
     isLogOutBox : false ,
-    isInPageBox : true ,
+    isCreateBox : true ,
 }
 
 const componentSlice = createSlice({
@@ -16,11 +16,11 @@ const componentSlice = createSlice({
         ChangeLogOutBox : (state , action) => {
             state.isLogOutBox = action.payload
         } , 
-        ChangeisInPageBox : ( state , action) => {
-            state.isInPageBox = action.payload
+        ChangeisCreateBox : ( state , action) => {
+            state.isCreateBox = action.payload
         }
     }
 })
 
-export const {ChangeEditProfile , ChangeLogOutBox , ChangeisInPageBox } = componentSlice.actions
+export const {ChangeEditProfile , ChangeLogOutBox , ChangeisCreateBox } = componentSlice.actions
 export default componentSlice.reducer
