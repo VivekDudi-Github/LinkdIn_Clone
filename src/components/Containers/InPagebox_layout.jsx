@@ -9,7 +9,7 @@ function InPagebox_layout({children}) {
     <>
       
         <div className='h-full w-full z-50 fixed left-0 top-0 bg-[#104c9a4f] text-white flex justify-center '>
-            <div className='bg-black rounded-3xl  h-[80%] w-2/3 top-20 relative duration-200'>
+            <div className='bg-black rounded-3xl  h-[80%] w-2/3 top-20 relative duration-200 flex flex-col'>
                 {children}
             </div>
         </div>
