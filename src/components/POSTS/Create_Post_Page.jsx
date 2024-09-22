@@ -3,14 +3,15 @@ import InPagebox_layout from '../Containers/InPagebox_layout'
 import { useDispatch , useSelector } from 'react-redux'
 import { ChangeisCreateBox } from '../../Redux/componentSlice'
 
-import image from '../../assets/2a.jpg' 
+import image1 from '../../assets/2a.jpg'
+import image2 from '../../assets/3a.jpg' 
 
 const images = [
   {
-    src : image
+    src : image1
   } , 
   {
-    src : image
+    src : image2
   } , 
 ]
 
@@ -54,10 +55,15 @@ function Create_Post_Page() {
          </span>
       </div>
 
-      <div className='mx-auto border-2 h-auto w-[90%] flex overflow-hidden '>
+      <div className='mx-auto  h-auto w-[90%] flex overflow-hidden '>
           {images.length >0 && 
             images.map((image , index) => (
-              <img className=""   src={image.src}  alt="uploaded photo" key={index} />
+              <img className= {`p-1  rounded-3xl object-cover
+                               ${images.length >1 ?  "w-1/2" : "w-full"  } `}   
+                    src={image.src}  
+                    alt="uploaded photo" 
+                    key={index} 
+             />
             ))}
       </div>
 
