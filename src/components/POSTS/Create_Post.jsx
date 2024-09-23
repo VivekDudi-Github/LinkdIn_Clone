@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Post_Box.css"
-import Image from "../../assets/2a.jpg"
 import {Create_Post_Page} from '../../index'
 import { useSelector } from 'react-redux'
 
@@ -18,7 +17,7 @@ function Create_Post() {
         <div className='w-full'>
             <div className='text-white pt-3 '>
                 <input className='bg-black w-full mb-2 focus:outline-none'
-                placeholder='What is happening?!'/>
+                placeholder='What is happening?!' readOnly/>
             </div>
             <div className='border-y border-gray-500 flex justify-between py-2 text-blue-500 '>
                 <div>
