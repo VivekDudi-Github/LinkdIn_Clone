@@ -1,17 +1,12 @@
-import React from 'react'
-import {useSelector ,} from 'react-redux'
-
 function InPagebox_layout({children}) {
-  const isInPageBox = useSelector(state => state.comp.isInPageBox)
-  
 
   return (
     <>
       
-        <div className='h-full w-full   z-50   fixed left-0 top-0   bg-[#104c9a4f] text-white   flex justify-center '>
-            <div className='bg-black rounded-3xl h-[80%]  w-full sm:w-2/5 sm:min-w-[500.99px]   top-20 relative   duration-200 '>
+        <div className=' w-full h-full  z-50  fixed left-0 top-0   bg-[#104c9a4f] text-white flex justify-center items-baseline pt-16  '>
+            <span className='bg-black rounded-3xl  max-h-[80%]   w-full sm:w-2/5 sm:min-w-[500.99px]   relative   duration-200 '>
                 {children}
-            </div>
+            </span>
         </div>
       
     </>

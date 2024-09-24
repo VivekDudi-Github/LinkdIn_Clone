@@ -199,7 +199,7 @@ useEffect(() => {
                         <img className=' object-contain w-[101%] h-[101%] absolute z-30' src={banner_downloadURL} alt="photo" />
                     <img className=' object-cover blur-sm w-full h-full  ' src={banner_downloadURL} alt="photo" />
                      <i className="fa-solid absolute top-[32%] left-[45%] fa-camera-rotate text-2xl text-white bg-[#43414191] p-3 rounded-full z-40 hover:cursor-pointer " onClick={() => BannerRef.current.click()} />    
-                        <input className='hidden' ref={BannerRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gi' 
+                        <input className='hidden' ref={BannerRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gif ' 
                                 onChange={uploadBanner}/> 
                 {/* Main Pic */}
                     <div className='w-36 h-36 absolute rounded-full top-[70%] left-4 bg-black flex justify-center items-center z-40 '>
@@ -208,7 +208,7 @@ useEffect(() => {
                                 onClick={() => MainPicRef.current.click()}
                                 />
 
-                            <input className='hidden' ref={MainPicRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gi' 
+                            <input className='hidden' ref={MainPicRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gif ' 
                                     onChange={uploadProfilePhoto}/> 
                                     
                     </div>

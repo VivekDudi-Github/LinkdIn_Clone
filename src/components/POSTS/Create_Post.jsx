@@ -1,15 +1,19 @@
 import React from 'react'
 import "./Post_Box.css"
 import {Create_Post_Page} from '../../index'
-import { useSelector } from 'react-redux'
+import { useSelector , useDispatch } from 'react-redux'
+import { ChangeisCreateBox } from '../../Redux/componentSlice'
 
 
 function Create_Post() {
-    const userImage = useSelector(state => state.UserSlice?.userData?.mainImage)
+    const dispatch = useDispatch() ;
+    const userImage = useSelector(state => state.UserSlice?.userData?.mainImage) ;
+    
 
     return (
     <>
-    <div className='flex  border-y-[0.5px] border-gray-600 pt-2 text-white  max-w-[800px]'>
+    <div className='flex  border-y-[0.5px] border-gray-600 pt-2 text-white  max-w-[800px]'
+          onClick={()=> dispatch(ChangeisCreateBox(true))}  >
         <div className=' w-16 p-2 pt-1 pb-3 '>
             <img className=' object-cover rounded-full w-[40px] h-[40px] 'src={userImage} alt='Profile-Photo'/>
         </div>
