@@ -45,30 +45,27 @@ function Create_Post_Page() {
 
 
   const handleImagesForUpload = (files) => {
-    let array = imagesForUpload ;
-       array.push(files[0])
-      setimagesForUpload(array)
-      console.log(imagesForUpload);  
+    let array = [...imagesForUpload  , files[0] ] ;
+       setimagesForUpload(array)
+      }   
+  const removeImagesForUpload = (_index) => {
+    let newArray = imagesForUpload.filter(( _ , index) => index !== _index )
+    setimagesForUpload(newArray)
   }
-  useEffect(() => {
-    // ()=> imagesForUpload
-  } , [imagesForUpload])
-
-
 
   return (
     <>
      {isBoxOpen && 
       <InPagebox_layout>
           
-      <div className=' relative h-full overflow-auto duration-200 pb-28'>
+    <div className=' relative h-full overflow-auto duration-200 pb-28'>
 
   {/* head */}
       <div className=' p-2 flex justify-between duration-200'>
           <button className='w-8 h-8 hover:bg-gray-800 rounded-full'
                   onClick={(e) => dispatch(ChangeisCreateBox(false))}>
 
-              <i className='fa-solid fa-close p-1 '></i>
+              <i className='fa-solid fa-close p-1 '/>
           </button>
 
           <span className=' font-bold text-blue-500 px-3'>
@@ -86,17 +83,24 @@ function Create_Post_Page() {
           <div className=' bg-gray-800   w-[1px] h-full mx-auto   rounded-full  '></div>
         </div>
 
-        <div className='  mx-auto  pt-3 h-auto w-[90%] flex overflow-auto duration-200 '>
+        <div className='  mx-auto  pt-3 h-auto w-[90%] flex overflow-x-auto duration-200  '>
+           
             {imagesForUpload.length > 0  && 
               imagesForUpload.map((image , index) => {
               let imageurl = URL.createObjectURL(image) 
                 
-              return <img className= {`p-1 min-h-[200px] max-h-[300px] rounded-3xl object-cover   
-                                ${imagesForUpload.length >1 ?  "w-1/2" : "w-full"  } `}   
+      return <div className={`p-1 h-[300px] rounded-3xl relative flex-shrink-0 ${imagesForUpload.length >1 ? ` w-1/2` : "w-full"} `} key={index}>
+              <img className= " h-full w-full rounded-3xl object-cover relative "
                       src={imageurl}  
-                      alt="uploaded photo" 
-                      key={index} 
+                      alt="uploaded photo"
               />
+                <button className='w-8 h-8 bg-[#5e5c5c6c] hover:bg-[#363535a3] rounded-full absolute top-2 left-2 duration-200'
+                  onClick={() => removeImagesForUpload(index)}>
+
+                <i className='fa-solid fa-close p-1 '/>
+                </button>
+                
+              </div>
               })}
         </div>
       </div>
