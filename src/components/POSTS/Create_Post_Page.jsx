@@ -4,9 +4,6 @@ import { useDispatch , useSelector } from 'react-redux'
 import { ChangeisCreateBox } from '../../Redux/componentSlice'
 import TextareaAutosize from 'react-textarea-autosize';
 
-import image1 from '../../assets/2a.jpg'
-import image2 from '../../assets/2a.jpg' 
-
 
 
 
@@ -19,9 +16,10 @@ function Create_Post_Page() {
   const [isBoxOpen , setIsBoxOpen] = useState(true) ;
 
   const [IsLocation , setIslocation] = useState(false)
-
+  const [publicVisiblity , setVisiblity] = useState(true)
    
   const [imagesForUpload , setimagesForUpload] = useState([])
+  
 
   useEffect(() => {
     const changeState = () => {
@@ -40,11 +38,10 @@ function Create_Post_Page() {
       <TextareaAutosize className=' w-[90%]  h-10  right-0  p-2  bg-[#181818a5] outline  outline-gray-500 outline-1 focus:outline-gray-50  focus:outline-1 rounded-lg duration-200 ' placeholder='What is happening?!'
       maxRows={6}/>
     </span>
-    
+    {IsLocation &&
     <input className={` w-[40%]  h-10 ml-11 m-2  p-2  bg-[#181818a5] outline  outline-gray-500 outline-1 focus:outline-gray-50  focus:outline-1 rounded-lg duration-200 
-                        ${IsLocation ? "" : "hidden"}
              `} placeholder='Location'/>
-    
+    }
   </div>)
 
 
@@ -63,7 +60,7 @@ function Create_Post_Page() {
      {isBoxOpen && 
       <InPagebox_layout>
         
-    <div className=' relative h-96 duration-200 pb-28'>
+    <div className=' relative max-h-[600px] min-h-96 duration-200 pb-28'>
 
   {/* head */}
       <div className=' p-2 flex justify-between duration-200'>
@@ -80,16 +77,16 @@ function Create_Post_Page() {
 
 
   {/* input boxes */}
-      <div className='overflow-y-scroll max-h-[100%]'>
+      <div className='overflow-y-scroll max-h-[400px]'>
 
         {input_box}
 
-        <div className=' flex px-2 '>
+        <div className=' flex px-2  '>
           <div className=' w-10 p-[1px]'>
             <div className=' bg-gray-800   w-[1px] h-full mx-auto   rounded-full  '></div>
           </div>
 
-        <div className='  mx-auto  pt-3 h-auto w-[90%] flex overflow-x-auto duration-200  '>
+          <div className='  mx-auto  pt-3 h-auto w-[90%] flex overflow-x-auto duration-200  '>
             
               {imagesForUpload.length > 0  && 
                 imagesForUpload.map((image , index) => {
@@ -100,7 +97,7 @@ function Create_Post_Page() {
                               src={imageurl}  
                               alt="uploaded photo"
                       />
-                        <button className='w-8 h-8 bg-[#5e5c5c6c] hover:bg-[#363535a3] rounded-full absolute top-2 left-2 duration-200'
+                        <button className='w-8 h-8  bg-[#5e5c5c6c] hover:bg-[#363535a3]  rounded-full absolute top-2 left-2   duration-200'
                           onClick={() => removeImagesForUpload(index)}>
 
                         <i className='fa-solid fa-close p-1 '/>
@@ -114,18 +111,19 @@ function Create_Post_Page() {
 
   {/* bottom */}
        
-        <div className=' absolute w-full  bottom-1'> 
-            <div className='px-2 py-1 h-9 text-blue-500 w-[34%] min-w-[160px] bg-white block rounded-lg'>
-                <i className="fa-solid fa-globe" />
-                &nbsp; Everone can reply
-            </div>
+        <div className=' absolute w-full h-auto bottom-1'> 
+            <button className='px-2 py-1 h-9 text-blue-500 w-[34%] min-w-[160px] bg-white block rounded-lg active:scale-90 duration-300'
+                onClick={() => setVisiblity(!publicVisiblity)}
+                >
+                &nbsp; {publicVisiblity ? "Everone can reply" : "Follwers Only"}
+            </button>
             <div className='border-t border-gray-500 flex justify-between py-2 text-blue-500'>
                   <div>
-                      <button className="fa-regular fa-image post_box_icons" onClick={() => UploadPhotoRef.current.click()}></button>
-                      <button className="fa-solid fa-bars-progress post_box_icons"></button>
-                      <button className="fa-regular fa-face-smile post_box_icons"></button>
-                      <button className="fa-solid fa-calendar-week post_box_icons"></button>
-                      <button className="fa-solid fa-location-dot post_box_icons" onClick={()=> setIslocation(!IsLocation)}></button>
+                      <button className="fa-regular fa-image post_box_icons" title='Pick Image' onClick={() => UploadPhotoRef.current.click()}></button>
+                      <button className="fa-solid fa-bars-progress post_box_icons" title='Polls'></button>
+                      <button className="fa-regular fa-face-smile post_box_icons" title='Emoji'></button>
+                      <button className="fa-solid fa-calendar-week post_box_icons" title='Schedule' ></button>
+                      <button className="fa-solid fa-location-dot post_box_icons" title='Location' onClick={()=> setIslocation(!IsLocation)}></button>
                   </div>
                   <input className='hidden' ref={UploadPhotoRef} type="file" accept='image/png, image/jpg, image/jpeg, image/gif '
                           onChange={(e) => handleImagesForUpload(e.target.files)} />
