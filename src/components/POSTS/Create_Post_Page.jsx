@@ -3,7 +3,8 @@ import InPagebox_layout from '../Containers/InPagebox_layout'
 import { useDispatch , useSelector } from 'react-redux'
 import { ChangeisCreateBox } from '../../Redux/componentSlice'
 import TextareaAutosize from 'react-textarea-autosize';
-
+import { collection , addDoc, Timestamp } from 'firebase/firestore';
+import { DB } from '../../firebase_SDK';
 
 
 
@@ -15,6 +16,7 @@ function Create_Post_Page() {
   const isBoxOpen_state = useSelector(state => state.comp?.isCreateBox)
   const [isBoxOpen , setIsBoxOpen] = useState(true) ;
 
+
   const [IsLocation , setIslocation] = useState(false)
   const [publicVisiblity , setVisiblity] = useState(true)
    
@@ -23,24 +25,29 @@ function Create_Post_Page() {
 
   useEffect(() => {
     const changeState = () => {
-      setIsBoxOpen(isBoxOpen_state)
-    } ;
+      setIsBoxOpen(isBoxOpen_state) } ;
     return changeState() ;
   } , [isBoxOpen_state])
 
+// post data
+const [mainText , setMainText] = useState("")
+const [Postlocation , setPostLocation] = useState("")
 
 
+//input boxes
   const profileImage = useSelector(state => state?.UserSlice?.userData?.mainImage)
   const input_box =( <div className='pt-4 px-3 '>
     <span className='flex '> 
       <img className='  h-9 w-9 mr-2  rounded-full  object-cover ' 
         src={profileImage} alt='profile image'/>
       <TextareaAutosize className=' w-[90%]  h-10  right-0  p-2  bg-[#181818a5] outline  outline-gray-500 outline-1 focus:outline-gray-50  focus:outline-1 rounded-lg duration-200 ' placeholder='What is happening?!'
-      maxRows={6}/>
+      maxRows={6}
+      onChange={(e) => {setMainText(e.target.value)}}/>
     </span>
     {IsLocation &&
     <input className={` w-[40%]  h-10 ml-11 m-2  p-2  bg-[#181818a5] outline  outline-gray-500 outline-1 focus:outline-gray-50  focus:outline-1 rounded-lg duration-200 
-             `} placeholder='Location'/>
+             `} placeholder='Location'
+               onChange={(e) => {setPostLocation(e.target.value)}}/>
     }
   </div>)
 
@@ -55,12 +62,32 @@ function Create_Post_Page() {
     setimagesForUpload(newArray)
   }
 
+
+
+
+// posting a post  
+
+const postingFunction = async () => {
+
+
+
+  const collectionRef = collection(DB , "post") 
+  const postDetails = {
+    mainText : mainText , 
+    location : Postlocation ? Postlocation : "" , 
+    time : Timestamp.now()
+  }
+
+} 
+
+
+
   return (
     <>
      {isBoxOpen && 
       <InPagebox_layout>
         
-    <div className=' relative max-h-[600px] min-h-96 duration-200 pb-28'>
+<div className=' relative max-h-[600px] min-h-96 duration-200 pb-28'>
 
   {/* head */}
       <div className=' p-2 flex justify-between duration-200'>
@@ -111,13 +138,12 @@ function Create_Post_Page() {
 
   {/* bottom */}
        
-        <div className=' absolute w-full h-auto bottom-1'> 
-            <button className='px-2 py-1 h-9 text-blue-500 w-[34%] min-w-[160px] bg-white block rounded-lg active:scale-90 duration-300'
+      <div className=' absolute w-full h-auto bottom-1'> 
+            <button className=' py-1 h-9 text-blue-500 w-[34%] min-w-[140px] bg-white block rounded-lg active:scale-90 duration-300'
                 onClick={() => setVisiblity(!publicVisiblity)}
-                >
-                &nbsp; {publicVisiblity ? "Everone can reply" : "Follwers Only"}
+                >{publicVisiblity ? "Everone can reply" : "Follwers Only"}
             </button>
-            <div className='border-t border-gray-500 flex justify-between py-2 text-blue-500'>
+          <div className='border-t border-gray-500 flex justify-between py-2 text-blue-500'>
                   <div>
                       <button className="fa-regular fa-image post_box_icons" title='Pick Image' onClick={() => UploadPhotoRef.current.click()}></button>
                       <button className="fa-solid fa-bars-progress post_box_icons" title='Polls'></button>
@@ -130,14 +156,15 @@ function Create_Post_Page() {
 
                   <div>
                   <button className='fa-solid fa-plus border border-gray-500 rounded-full py-[3px] px-[4px]' />
-                  <button className='bg-[#3887ee] text-center  text-white font-bold rounded-full px-3 mx-2'
+                  <button className='bg-[#3887ee] text-center  text-white font-bold rounded-full px-3 mx-2 disabled:bg-[#143053] duration-200 '
+                    disabled = {!mainText}
                   >Post
                   </button>
                   </div>
-            </div>
-        </div> 
-
+          </div>
       </div>
+
+</div>
 
       </InPagebox_layout>
     }

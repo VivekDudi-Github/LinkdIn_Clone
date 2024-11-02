@@ -49,7 +49,6 @@ const handleHidePass = () => {
         try {
             const response =  await createUserWithEmailAndPassword(Auth , email , Password1)
                 alert("Signed Up successfully")
-                console.log(response); 
                 if(response){
                     const user = {
                         name : name , 
@@ -61,11 +60,9 @@ const handleHidePass = () => {
                     const CollectionRef = collection(DB , "user")
                     try {
                         await addDoc(CollectionRef , user)
-                        alert("Logging IN")
                         await signInWithEmailAndPassword(Auth , response.user.email , Password1 )
                         alert("LoggedIn successfully")
                         navigate("/profile")
-                        
                     } catch (error) {
                        alert("error while adding the userCredentials") 
                     }
